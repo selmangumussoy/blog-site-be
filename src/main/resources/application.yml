@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: blog-site-be
+  datasource:
+    url: jdbc:mysql://localhost:3306/blog-site
+    username: root
+    password: hSelMan?!11444
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
