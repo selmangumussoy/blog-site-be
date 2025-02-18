@@ -2,6 +2,7 @@ package com.example.blogsitebe.library.rest;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalIdCache;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @Getter
 @AllArgsConstructor
-@NaturalIdCache
+@NoArgsConstructor
 public class DataResponse<T> {
     private List<T> items = List.of();
 

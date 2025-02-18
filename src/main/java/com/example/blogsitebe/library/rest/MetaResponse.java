@@ -20,8 +20,8 @@ public class MetaResponse {
     public String description;
     public String code;
 
-    public static MetaResponse of(String description, String code) {
-        return new MetaResponse(description, code);
+    public static MetaResponse of(String code, String description) {
+        return new MetaResponse(code, description);
     }
 
     public static MetaResponse success() {
