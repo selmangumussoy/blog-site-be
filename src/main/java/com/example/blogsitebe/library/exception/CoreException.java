@@ -20,7 +20,7 @@ public class CoreException extends RuntimeException {
         this.args = args;
         this.message = null;
     }
-    public CoreException(String message, MessageCodes code) {
+    public CoreException(MessageCodes code, String message) {
         this.code = code;
         this.message = message;
         this.args = null;

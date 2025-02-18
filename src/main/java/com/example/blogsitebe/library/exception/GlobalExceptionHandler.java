@@ -1,6 +1,5 @@
 package com.example.blogsitebe.library.exception;
 
-import ch.qos.logback.core.util.StringUtil;
 import com.example.blogsitebe.library.enums.MessageCodes;
 import com.example.blogsitebe.library.rest.MetaResponse;
 import com.example.blogsitebe.library.rest.Response;
