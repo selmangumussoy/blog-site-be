@@ -19,7 +19,20 @@ public class User {
     private String id;
 
     @Column()
+    private boolean accountNonExpired;      //hesabının süresinin dolup dolmadığını
+
+    @Column()
+    private boolean enabled;                //hesabının etkin olup olmadığını
+
+    @Column()
+    private boolean accountNonLocked;       //hesabının kilitli olup olmadığını
+
+    @Column()
+    private boolean credentialsNonExpired;  //kimlik bilgilerinin süresinin dolup dolmadığını
+
+    @Column()
     private String name;
+
 
     @Column()
     private String surname;
