@@ -17,7 +17,7 @@ public class ExcerptController extends BaseController {
     private final ExcerptService service;
 
     @PostMapping
-    public Response<ExcerptResponse> excerpt(@RequestBody ExcerptRequest request) {
+    public Response<ExcerptResponse> save(@RequestBody ExcerptRequest request) {
         return respond(ExcerptMapper.toResponse(service.save(ExcerptMapper.toDto(request))));
     }
 
