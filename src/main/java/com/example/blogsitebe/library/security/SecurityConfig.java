@@ -40,7 +40,10 @@ public class SecurityConfig{
                 .headers(x -> x.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(x -> x.requestMatchers(mvc.pattern("/auth/**")).permitAll())
+//                .authorizeHttpRequests(x ->
+//                                    x.requestMatchers(mvc.pattern("/auth/**")).permitAll()
+//                                    .requestMatchers(mvc.pattern("/public/**")).permitAll())
+                .authorizeHttpRequests(x -> x.anyRequest().permitAll())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
