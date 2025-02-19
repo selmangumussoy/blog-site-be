@@ -21,7 +21,6 @@ public class Excerpt extends AbstractEntity {
     public static final String COL_CONTENT = "content";
     public static final String COL_USER_ID = "user_id";
     public static final String COL_SOURCE_TITLE = "source_title";
-    public static final String COL_TAG_ID = "tag_id";
     public static final String COL_LANGUAGE= "language";
     public static final String COL_PAGE_NUMBER = "page_number";
 
@@ -33,9 +32,6 @@ public class Excerpt extends AbstractEntity {
 
     @Column(name = COL_SOURCE_TITLE)
     private String sourceTitle;
-
-    @Column(name = COL_TAG_ID)
-    private String tagId;
 
     @Column(name = COL_LANGUAGE)
     private String bookLanguage;
