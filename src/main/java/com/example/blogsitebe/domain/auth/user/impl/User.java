@@ -1,10 +1,8 @@
 package com.example.blogsitebe.domain.auth.user.impl;
 
-import com.example.blogsitebe.domain.auth.user.api.UserRole;
+import com.example.blogsitebe.domain.auth.user.api.Role;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -46,7 +44,7 @@ public class User {
     @Column(nullable = false)
     private String password; // Şifre (BCrypt ile saklanacak)
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Enumerated(EnumType.STRING) // Enum'u string olarak saklar
-    private Set<UserRole> roles; // Kullanıcı rollerini saklar
+    @Enumerated(EnumType.STRING)  // Enum değerini String olarak saklar
+    @Column(nullable = false)
+    private Role role; // Kullanıcı rollerini saklar
 }
