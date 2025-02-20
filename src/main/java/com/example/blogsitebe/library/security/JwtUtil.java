@@ -3,25 +3,52 @@ package com.example.blogsitebe.library.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
+import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class JwtUtil {
-    private final String SECRET_KEY = "secret";
+    @Value("${jwt.secret.key}")
+    private String SECRET_KEY = "secret";
+    private static final String ROLE = "role";
+    private static final long JWT_EXPIRATION =  1000 * 60 * 60;
+    private static final long ALLOWED_CLOCK_SKEW_SECONDS = 30 * 24 * 60 * 60L;
 
-    private final long EXPIRATION_TIME = 86400000; // 1 gün (milisaniye cinsinden)
+    public String generateToken(UserDetails userDetails) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put(ROLE, userDetails.getAuthorities().iterator().next().getAuthority());
+        return createToken(claims,userDetails.getUsername());
+    }
 
-    public String generateToken(String username) {
+    private String createToken(Map<String, Object> claims, String subject) {
         return Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis()+ EXPIRATION_TIME))
-                .signWith(SignatureAlgorithm.ES256, SECRET_KEY)
+                .setClaims(claims)
+                .setSubject(subject)
+                .setIssuedAt(new Date()) //token oluşturulma zamanı
+                .setExpiration(new Date(System.currentTimeMillis()+ JWT_EXPIRATION))
+                .signWith(getSignKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
+    private Key getSignKey() {
+        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        return Keys.hmacShaKeyFor(keyBytes);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // Token bilgilerini çekerek valide etme işlemleri //
+
+    public boolean validateToken(String token, UserDetails userDetails) {
+        String extractedUsername = extractUsername(token);
+        return (extractedUsername.equals(userDetails.getUsername()) && ! isTokenExpired(token));
+    }
     public String extractUsername(String token) {
         return extractAllClaims(token).getSubject();
     }
@@ -30,15 +57,12 @@ public class JwtUtil {
         return extractAllClaims(token).getExpiration().before(new Date());
     }
 
-    public boolean validateToken(String token, String username) {
-        String extractedUsername = extractUsername(token);
-        return (extractedUsername.equals(username) && !isTokenExpired(token));
-    }
-
     private Claims extractAllClaims(String token) {
-        return Jwts.parser()
-                .setSigningKey(SECRET_KEY) // Gizli anahtar
-                .parseClaimsJws(token)
-                .getBody();
+        return Jwts.parserBuilder()
+                .setSigningKey(getSignKey())
+                .setAllowedClockSkewSeconds(ALLOWED_CLOCK_SKEW_SECONDS)//Saat farkı toleransı
+                .build()
+                .parseClaimsJws(token) // Token’ı doğrula ve çözümle
+                .getBody();//Token içindeki bilgileri al
     }
 }

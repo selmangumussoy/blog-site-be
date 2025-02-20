@@ -1,47 +1,39 @@
 package com.example.blogsitebe.library.security;
 
-import com.example.blogsitebe.domain.auth.user.api.UserRole;
-import org.springframework.context.support.BeanDefinitionDsl;
+import com.example.blogsitebe.domain.auth.user.impl.User;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.Collections;
 
 /*
 Spring Security'nin kullanıcı bilgilerini (UserDetails) tanıyabilmesi için özel bir
 kullanıcı detay sınıfı oluşturmak.
 */
 public class CustomUserDetails implements UserDetails {
-    private final String username;
-    private final String password;
+    private final User user;
 
-    public CustomUserDetails(String username, String password, Set<UserRole> roles) {
-        this.username = username;
-        this.password = password;
-        Set<GrantedAuthority> authorities = roles.stream()
-                .map(role -> (GrantedAuthority) role::name)
-                .collect(Collectors.toSet());
+    public CustomUserDetails(User user) {
+        this.user = user;
     }
-//    private final String name;
-//    private final String surname;
-//    private final String email;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return Collections.singletonList(new SimpleGrantedAuthority(user.getRole().name()));
     }
+//    user.getRole().name() ile "ROLE_USER" veya "ROLE_ADMIN" olarak
+//    Spring Security'nin anlayacağı bir formatta döndürüyoruz.
 
     @Override
     public String getPassword() {
-        return password;
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return username;
+        return user.getUsername();
     }
 
     @Override

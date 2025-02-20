@@ -2,6 +2,8 @@ package com.example.blogsitebe.domain.platform.excerpt.api;
 
 import lombok.Builder;
 
+import java.util.List;
+
 @Builder
 public record ExcerptDto(
         String id,
@@ -9,7 +11,7 @@ public record ExcerptDto(
         String modified,
         String content,
         String userId,
-        String tagId,
+        List<String> tagId,
         String sourceTitle,
         String bookLanguage,
         String bookPageNumber

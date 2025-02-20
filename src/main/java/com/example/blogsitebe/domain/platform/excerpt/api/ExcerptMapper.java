@@ -17,6 +17,7 @@ public class ExcerptMapper {
 
     public static ExcerptResponse toResponse(ExcerptDto excerpt) {
         return ExcerptResponse.builder()
+                .tagId(excerpt.tagId())
                 .bookLanguage(excerpt.bookLanguage())
                 .bookPageNumber(excerpt.bookPageNumber())
                 .content(excerpt.content())
