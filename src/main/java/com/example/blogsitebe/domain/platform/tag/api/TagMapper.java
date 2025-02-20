@@ -2,6 +2,7 @@ package com.example.blogsitebe.domain.platform.tag.api;
 
 import com.example.blogsitebe.domain.platform.tag.web.TagRequest;
 import com.example.blogsitebe.domain.platform.tag.web.TagResponse;
+import org.springframework.data.domain.Page;
 
 public class TagMapper {
     public static TagDto toDto(TagRequest request) {
@@ -16,5 +17,10 @@ public class TagMapper {
                 .description(dto.description())
                 .name(dto.name())
                 .build();
+    }
+
+    public static Page<TagResponse> toPageResponse(Page<TagDto> dtos) {
+        //TODO
+        return null;
     }
 }
