@@ -1,51 +1,45 @@
 package com.example.blogsitebe.domain.auth.user.impl;
 
 import com.example.blogsitebe.domain.auth.user.api.Role;
+import com.example.blogsitebe.library.rest.AbstractEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Getter
 @Setter
-@Table(name = "users")
-public class User {
+@Table(name = User.TABLE)
+public class User extends AbstractEntity {
+    public static final String TABLE = "users";
+    private static final String COL_NAME = "name";
+    private static final String COL_EMAIL = "email";
+    private static final String COL_SURNAME = "surname";
+    private static final String COL_PASSWORD = "password";
+    private static final String COL_PHONE_NUMBER = "phone_number";
+    private static final String COL_ROLE = "role";
+    private static final String COL_PROFILE_ID = "profile_id";
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
-
-    @Column()
-    private boolean accountNonExpired;      //hesabının süresinin dolup dolmadığını
-
-    @Column()
-    private boolean enabled;                //hesabının etkin olup olmadığını
-
-    @Column()
-    private boolean accountNonLocked;       //hesabının kilitli olup olmadığını
-
-    @Column()
-    private boolean credentialsNonExpired;  //kimlik bilgilerinin süresinin dolup dolmadığını
-
-    @Column()
+    @Column(name = COL_NAME)
     private String name;
 
-
-    @Column()
+    @Column(name = COL_SURNAME)
     private String surname;
 
-    @Column()
+    @Column(name = COL_EMAIL)
+    private String email;
+
+    @Column(name = COL_PASSWORD, nullable = false)
+    private String password;
+
+    @Column(name = COL_PHONE_NUMBER)
     private String phoneNumber;
 
-    @Column(nullable = false, unique = true)
-    private String username;
+    @Enumerated(EnumType.STRING)
+    @Column(name = COL_ROLE, nullable = false)
+    private Role role;
 
-    @Column(nullable = false)
-    private String password; // Şifre (BCrypt ile saklanacak)
-
-    @Enumerated(EnumType.STRING)  // Enum değerini String olarak saklar
-    @Column(nullable = false)
-    private Role role; // Kullanıcı rollerini saklar
+    @Column(name = COL_PROFILE_ID)
+    private String profileId;
 }
