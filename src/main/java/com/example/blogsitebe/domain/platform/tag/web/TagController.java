@@ -22,11 +22,11 @@ public class TagController extends BaseController {
         return respond(TagMapper.toResponse(service.save(TagMapper.toDto(request))));
     }
 
-    @GetMapping
-    public Response<PageResponse<TagResponse>> filter(Pageable pageable) {
-        //TODO
-        return null;
-    }
+//    @GetMapping
+//    public Response<PageResponse<TagResponse>> filter(Pageable pageable) {
+//        //TODO
+//        return null;
+//    }
 
     @GetMapping
     public Response<PageResponse<TagResponse>> getAll(Pageable pageable) {
