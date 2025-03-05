@@ -1,4 +1,4 @@
-package com.example.blogsitebe.domain.platform.profile;
+package com.example.blogsitebe.domain.platform.profile.api;
 
 import com.example.blogsitebe.library.rest.AbstractEntity;
 import jakarta.persistence.Entity;

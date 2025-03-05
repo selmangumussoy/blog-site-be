@@ -1,5 +1,6 @@
 package com.example.blogsitebe.domain.platform.profile;
 
+import com.example.blogsitebe.domain.platform.profile.api.Profile;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
