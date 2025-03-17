@@ -9,6 +9,6 @@ import org.springframework.stereotype.Service;
 public class ProfileServiceImpl {
     private final ProfileRepository repository;
     public Profile save() {
-        return null;
+        return repository.save(new Profile());
     }
 }
