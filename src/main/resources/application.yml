@@ -5,7 +5,7 @@ spring:
   application:
     name: blog-site-be
   datasource:
-    url: jdbc:mysql://localhost:3306/blog-site
+    url: jdbc:mysql://localhost:3306/asim-nesli
     username: root
     password: hSelMan?!11444
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -15,4 +15,4 @@ spring:
 
 jwt:
   secret:
-    key: 78aa3c30f3adf24c560790db836f2b56ba1b8ed7c79606af68edddd7a86afd255b555982512e876b0f7136ae71d225b0a0db485e3df0c4b653865d86a317bd6a538f1d54d2a12461c094f6aa1b7cd263143c70223cefbc77f2769d0c3dd2c1edbd38212cce1428e215742b73e352123ffb27ef56b8a05381814caef301e08f4b27fc8eb93786a5e387c7613afb07e1563e2ec8d5deecc2d7bbfa70a6750e133aff9dc5f73c2a4f6d34aed2fce7ff821d7cef045bc233865be0b258a414eb31a7f646611f36d46a6552132cd18e425491b7d80de041fa907719a0fc49f7f4bac6ea439dc60799c54d09ee5109c6110f12aad574643c5d14f64f42b1616e56c959
+    key: "BuCokGuvenliNebahatVeUzunBirSecretKeyYavuz0123456Asli"
