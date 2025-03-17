@@ -20,7 +20,6 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public TokenDto signUp(SignUpDto dto) {
-
         User savedUser = userService.save(UserMapper.toEntity(dto));
         UserDetails userDetails = new CustomUserDetails(savedUser);
         String token = jwtUtil.generateToken(userDetails);
