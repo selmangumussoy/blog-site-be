@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +24,7 @@ import java.util.Optional;
 public class AuthServiceImpl implements AuthService {
     private final UserServiceImpl userService;
     private final JwtUtil jwtUtil;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public TokenDto signUp(SignUpDto dto) {
@@ -35,13 +37,16 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public TokenDto login(LoginDto dto) {
-        Optional<User> user = userService.findByEmailAndPassword(dto.username(),dto.password(), dto.role());
+        Optional<User> user = userService.findByEmailAndRole(dto.username(), dto.role());
 
-        return generateToken(user.get());
+        if (user.isPresent() && passwordEncoder.matches(dto.password(), user.get().getPassword())) {
+            return generateToken(user.get());
+        }
+        return null;
     }
 
     private TokenDto generateToken(User user) {
-        List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(user.getRole().name()));
+        List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(user.getRole().toString()));
 
         UserDetails userDetails = org.springframework.security.core.userdetails.User.builder()
                 .username(user.getEmail())

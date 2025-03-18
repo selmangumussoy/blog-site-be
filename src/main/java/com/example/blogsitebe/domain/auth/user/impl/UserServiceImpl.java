@@ -33,7 +33,7 @@ public class UserServiceImpl {
 
     }
 
-    public Optional<User> findByEmailAndPassword(String username, String password, Role role) {
-        return repository.findByEmailAndPasswordAndRole(username,password,role);
+    public Optional<User> findByEmailAndRole(String email, Role role) {
+        return repository.findByEmailAndRole(email,role);
     }
 }

@@ -8,7 +8,14 @@ import com.example.blogsitebe.domain.auth.user.api.Role;
 
 public class AuthMapper {
     public static SignUpDto toDto(SignUpRequest signUpRequest, Role role) {
-        return null;
+        return new SignUpDto(
+                signUpRequest.password(),
+                signUpRequest.email(),
+                signUpRequest.name(),
+                signUpRequest.surname(),
+                signUpRequest.phoneNumber(),
+                role
+        );
     }
 
     public static LoginDto toDto(LoginRequest request, Role role) {
