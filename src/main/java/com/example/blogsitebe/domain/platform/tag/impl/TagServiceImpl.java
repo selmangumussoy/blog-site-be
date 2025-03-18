@@ -2,6 +2,7 @@ package com.example.blogsitebe.domain.platform.tag.impl;
 
 import com.example.blogsitebe.domain.platform.tag.api.TagDto;
 import com.example.blogsitebe.domain.platform.tag.api.TagService;
+import com.example.blogsitebe.library.utils.PageUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,7 +32,7 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public Page<TagDto> getAll(Pageable pageable) {
-        return repository.findAll(pageable).map(TagMapper::toDto);
+        return PageUtil.pageToDto(repository.findAll(pageable),TagMapper::toDto);
     }
 
     @Override
