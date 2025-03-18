@@ -1,5 +1,6 @@
 package com.example.blogsitebe.domain.platform.excerpt.api;
 
+import com.example.blogsitebe.domain.platform.tag.api.TagDto;
 import lombok.Builder;
 
 import java.util.List;
@@ -11,9 +12,10 @@ public record ExcerptDto(
         String modified,
         String content,
         String userId,
-        List<String> tagId,
+        List<TagDto> tagId,
         String sourceTitle,
         String bookLanguage,
-        String bookPageNumber
+        String bookPageNumber,
+        String photo
 ) {
 }

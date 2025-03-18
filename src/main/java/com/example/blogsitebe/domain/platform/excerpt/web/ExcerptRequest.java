@@ -11,6 +11,7 @@ public record ExcerptRequest (
         String content,
         String sourceTitle,
         String bookLanguage,
-        String bookPageNumber
+        String bookPageNumber,
+        String photo
 ){
 }

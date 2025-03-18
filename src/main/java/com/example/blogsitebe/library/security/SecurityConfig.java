@@ -53,8 +53,8 @@ public class SecurityConfig{
                                        .requestMatchers(mvc.pattern("/user/**")).hasAnyAuthority("ROLE_USER")
                                        .requestMatchers(mvc.pattern("/auth/**")).permitAll()
                                                .requestMatchers(mvc.pattern("/tags/**")).permitAll()
-
-                                               .anyRequest().authenticated())
+                                               .requestMatchers(mvc.pattern("/excerpts/**")).permitAll())
+//                                               .anyRequest().authenticated())
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
