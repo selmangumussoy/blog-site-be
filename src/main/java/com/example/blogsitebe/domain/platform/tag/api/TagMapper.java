@@ -4,6 +4,9 @@ import com.example.blogsitebe.domain.platform.tag.web.TagRequest;
 import com.example.blogsitebe.domain.platform.tag.web.TagResponse;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class TagMapper {
     public static TagDto toDto(TagRequest request) {
         return TagDto.builder()
@@ -14,6 +17,7 @@ public class TagMapper {
 
     public static TagResponse toResponse(TagDto dto) {
         return TagResponse.builder()
+                .id(dto.id())
                 .description(dto.description())
                 .name(dto.name())
                 .build();
@@ -23,4 +27,11 @@ public class TagMapper {
         //TODO
         return null;
     }
+
+    public static List<TagResponse> toResponses(List<TagDto> all) {
+        return all.stream()
+                .map(TagMapper::toResponse)
+                .collect(Collectors.toList());
+    }
+
 }
