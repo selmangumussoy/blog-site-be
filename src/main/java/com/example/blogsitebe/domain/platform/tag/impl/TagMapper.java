@@ -11,6 +11,7 @@ public class TagMapper {
 
     public static TagDto toDto(Tag tag) {
         return TagDto.builder()
+                .id(tag.getId())
                 .name(tag.getName())
                 .description(tag.getDescription())
                 .build();

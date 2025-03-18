@@ -3,12 +3,8 @@ package com.example.blogsitebe.domain.platform.tag.web;
 import com.example.blogsitebe.domain.platform.tag.api.TagDto;
 import com.example.blogsitebe.domain.platform.tag.api.TagMapper;
 import com.example.blogsitebe.domain.platform.tag.api.TagService;
-import com.example.blogsitebe.library.rest.BaseController;
-import com.example.blogsitebe.library.rest.MetaResponse;
-import com.example.blogsitebe.library.rest.PageResponse;
-import com.example.blogsitebe.library.rest.Response;
+import com.example.blogsitebe.library.rest.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -28,9 +24,13 @@ public class TagController extends BaseController {
 //        return null;
 //    }
 
+//    @GetMapping
+//    public Response<PageResponse<TagResponse>> getAll(Pageable pageable) {
+//        return respond(TagMapper.toPageResponse(service.getAll(pageable)));
+//    }
     @GetMapping
-    public Response<PageResponse<TagResponse>> getAll(Pageable pageable) {
-        return respond(TagMapper.toPageResponse(service.getAll(pageable)));
+    public Response<DataResponse<TagResponse>> findAll() {
+        return respond(TagMapper.toResponses(service.findAll()));
     }
 
     @GetMapping("/{id}")
