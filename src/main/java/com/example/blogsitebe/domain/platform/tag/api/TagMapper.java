@@ -17,9 +17,11 @@ public class TagMapper {
 
     public static TagResponse toResponse(TagDto dto) {
         return TagResponse.builder()
-                .id(dto.id())
-                .description(dto.description())
-                .name(dto.name())
+                .id(dto.getId())
+                .description(dto.getDescription())
+                .name(dto.getName())
+                .modified(dto.getModified())
+                .created(dto.getCreated())
                 .build();
     }
 

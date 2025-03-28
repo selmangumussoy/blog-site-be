@@ -1,19 +1,23 @@
 package com.example.blogsitebe.domain.platform.excerpt.api;
 
-import lombok.Builder;
-
+import com.example.blogsitebe.domain.platform.tag.api.TagDto;
+import lombok.*;
+import java.util.Date;
 import java.util.List;
 
 @Builder
-public record ExcerptDto(
-        String id,
-        String created,
-        String modified,
-        String content,
-        String userId,
-        List<String> tagId,
-        String sourceTitle,
-        String bookLanguage,
-        String bookPageNumber
-) {
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+public class ExcerptDto{
+    private  String id;
+    private Date created;
+    private Date modified;
+    private String content;
+    private String userId;
+    private List<TagDto> tagDtoList;
+    private String sourceTitle;
+    private String bookLanguage;
+    private String bookPageNumber;
 }

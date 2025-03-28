@@ -5,13 +5,11 @@ import com.example.blogsitebe.domain.platform.excerpt.api.ExcerptService;
 import com.example.blogsitebe.library.rest.BaseController;
 import com.example.blogsitebe.library.rest.Response;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
-@RequestMapping("excerpts")
+@RequestMapping("/excerpts")
 @RequiredArgsConstructor
 public class ExcerptController extends BaseController {
     private final ExcerptService service;
@@ -21,4 +19,8 @@ public class ExcerptController extends BaseController {
         return respond(ExcerptMapper.toResponse(service.save(ExcerptMapper.toDto(request))));
     }
 
+    @GetMapping
+    public List<ExcerptResponse> getAll() {
+        return ExcerptMapper.toResponses(service.getAll());
+    }
 }
