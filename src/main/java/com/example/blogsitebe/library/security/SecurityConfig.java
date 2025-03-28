@@ -49,16 +49,17 @@ public class SecurityConfig{
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(x ->
-                                       x.requestMatchers(mvc.pattern("/admin/**")).hasAnyAuthority("ROLE_ADMIN")
-                                       .requestMatchers(mvc.pattern("/user/**")).hasAnyAuthority("ROLE_USER")
-                                       .requestMatchers(mvc.pattern("/auth/**")).permitAll()
-                                               .requestMatchers(mvc.pattern("/tags/**")).permitAll()
-
-                                               .anyRequest().authenticated())
+                        x.requestMatchers(mvc.pattern("/admin/**")).hasAnyAuthority("ROLE_ADMIN")
+                                .requestMatchers(mvc.pattern("/user/**")).hasAnyAuthority("ROLE_USER")
+                                .requestMatchers(mvc.pattern("/auth/**")).permitAll()
+                                .requestMatchers(mvc.pattern("/tags/**")).permitAll()
+                                .requestMatchers(mvc.pattern("/excerpts/**")).permitAll()
+                                .anyRequest().authenticated()
+                )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                .cors(cors -> cors.configurationSource(corsConfigurationSource())); // CORS yapılandırmasını ekleyin
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()));
 
         return security.build();
     }

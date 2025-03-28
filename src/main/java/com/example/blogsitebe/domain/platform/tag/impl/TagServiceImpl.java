@@ -1,5 +1,6 @@
 package com.example.blogsitebe.domain.platform.tag.impl;
 
+import com.example.blogsitebe.domain.platform.excerpt.impl.excerpttag.ExcerptTagRepository;
 import com.example.blogsitebe.domain.platform.tag.api.TagDto;
 import com.example.blogsitebe.domain.platform.tag.api.TagService;
 import com.example.blogsitebe.library.utils.PageUtil;
@@ -9,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,5 +57,9 @@ public class TagServiceImpl implements TagService {
 
     public Optional<Tag> findById(String tagId) {
         return repository.findById(tagId);
+    }
+
+    public List<Tag> findTagsByExcerptId(String id) {
+        return repository.findTagsByExcerptId(id);
     }
 }

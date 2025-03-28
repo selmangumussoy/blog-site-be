@@ -1,13 +1,17 @@
 package com.example.blogsitebe.domain.platform.tag.api;
 
-import lombok.Builder;
+import lombok.*;
+import java.util.Date;
 
 @Builder
-public record TagDto(
-        String id,
-        String created,
-        String modified,
-        String name,
-        String description
-) {
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public class TagDto{
+    private String id;
+    private Date created;
+    private Date modified;
+    private String name;
+    private String description;
 }
