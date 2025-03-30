@@ -21,8 +21,13 @@ public class Excerpt extends AbstractEntity {
     public static final String COL_CONTENT = "content";
     public static final String COL_USER_ID = "user_id";
     public static final String COL_SOURCE_TITLE = "source_title";
-    public static final String COL_LANGUAGE= "language";
-    public static final String COL_PAGE_NUMBER = "page_number";
+    public static final String COL_PUBLISHER = "publisher";
+    public static final String COL_PUBLISH_DATE = "publish_date";
+    public static final String COL_PAGE = "page";
+    public static final String COL_DESCRIPTION = "description";
+    public static final String COL_OPTIONAL = "optional";
+    public static final String COL_IMAGE = "image";
+
 
     @Column(name = COL_CONTENT)
     private String content;
@@ -33,9 +38,21 @@ public class Excerpt extends AbstractEntity {
     @Column(name = COL_SOURCE_TITLE)
     private String sourceTitle;
 
-    @Column(name = COL_LANGUAGE)
-    private String bookLanguage;
+    @Column(name = COL_PUBLISHER)
+    private String publisher;
 
-    @Column(name = COL_PAGE_NUMBER)
-    private String bookPageNumber;
+    @Column(name = COL_PUBLISH_DATE)
+    private String publishDate;
+
+    @Column(name = COL_PAGE)
+    private String page;
+
+    @Column(name = COL_DESCRIPTION)
+    private String description;
+
+    @Column(name = COL_OPTIONAL)
+    private String optional;
+
+    @Column(name = COL_IMAGE)
+    private String image;
 }

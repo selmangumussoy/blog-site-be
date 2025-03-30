@@ -81,8 +81,12 @@ public class ExcerptServiceImpl implements ExcerptService {
                     .content(excerpt.getContent())
                     .userId(excerpt.getUserId())
                     .sourceTitle(excerpt.getSourceTitle())
-                    .bookLanguage(excerpt.getBookLanguage())
-                    .bookPageNumber(excerpt.getBookPageNumber())
+                    .page(excerpt.getPage())
+                    .optional(excerpt.getOptional())
+                    .publishDate(excerpt.getPublishDate())
+                    .description(excerpt.getDescription())
+                    .publisher(excerpt.getPublisher())
+                    .image(excerpt.getImage())
                     .tagDtoList(tagDtoList)  // TagDto listesi burada yer alacak
                     .build());
         }
