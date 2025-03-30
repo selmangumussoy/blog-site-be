@@ -5,6 +5,7 @@ import com.example.blogsitebe.domain.platform.excerpt.api.ExcerptService;
 import com.example.blogsitebe.library.rest.BaseController;
 import com.example.blogsitebe.library.rest.Response;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class ExcerptController extends BaseController {
     private final ExcerptService service;
 
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_USER')")
     public Response<ExcerptResponse> save(@RequestBody ExcerptRequest request) {
         return respond(ExcerptMapper.toResponse(service.save(ExcerptMapper.toDto(request))));
     }
