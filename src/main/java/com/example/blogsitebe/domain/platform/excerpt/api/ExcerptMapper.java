@@ -9,24 +9,35 @@ import java.util.stream.Collectors;
 public class ExcerptMapper {
     public static ExcerptDto toDto(ExcerptRequest request) {
         return ExcerptDto.builder()
-                .userId(request.userId())
-                .sourceTitle(request.sourceTitle())
-                .bookPageNumber(request.bookPageNumber())
-                .bookLanguage(request.bookLanguage())
-                .tagDtoList(request.tagId().stream()
+                .userId(request.getUserId())
+                .sourceTitle(request.getSourceTitle())
+                .page(request.getPage())
+                .publisher(request.getPublisher())
+                .description(request.getDescription())
+                .tagDtoList(request.getTagId().stream()
                         .map(tagId -> TagDto.builder().id(tagId).build())
                         .collect(Collectors.toList()))
-                .content(request.content())
+                .content(request.getContent())
+                .publishDate(request.getPublishDate())
+                .optional(request.getOptional())
+                .image(request.getImage())
                 .build();
     }
 
     public static ExcerptResponse toResponse(ExcerptDto excerpt) {
         return ExcerptResponse.builder()
+                .id(excerpt.getUserId())
+                .created(excerpt.getCreated())
+                .modified(excerpt.getModified())
                 .tagId(excerpt.getTagDtoList())
-                .bookLanguage(excerpt.getBookLanguage())
-                .bookPageNumber(excerpt.getBookPageNumber())
+                .page(excerpt.getPage())
+                .publishDate(excerpt.getPublishDate())
+                .optional(excerpt.getOptional())
+                .description(excerpt.getDescription())
                 .content(excerpt.getContent())
                 .sourceTitle(excerpt.getSourceTitle())
+                .publisher(excerpt.getPublisher())
+                .image(excerpt.getImage())
                 .build();
     }
 

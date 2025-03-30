@@ -11,16 +11,20 @@ import java.util.stream.Collectors;
 public class ExcerptMapper {
     public static Excerpt toEntity(Excerpt excerpt, ExcerptDto dto) {
         excerpt.setUserId(dto.getUserId());
-        excerpt.setBookLanguage(dto.getBookLanguage());
+        excerpt.setPage(dto.getPage());
         excerpt.setContent(dto.getContent());
         excerpt.setSourceTitle(dto.getSourceTitle());
-        excerpt.setBookPageNumber(dto.getBookPageNumber());
+        excerpt.setOptional(dto.getOptional());
+        excerpt.setPublisher(dto.getPublisher());
+        excerpt.setPublishDate(dto.getPublishDate());
+        excerpt.setDescription(dto.getDescription());
+        excerpt.setImage(excerpt.getImage());
         return excerpt;
     }
 
     public static ExcerptDto toDto(Excerpt excerpt, List<Tag> tags) {
         List<TagDto> tagDtoList = tags.stream()
-                .map(TagMapper::toDto)  // Her Tag entity'sini TagDto'ya dönüştür
+                .map(TagMapper::toDto)
                 .collect(Collectors.toList());
 
         return ExcerptDto.builder()
@@ -30,9 +34,13 @@ public class ExcerptMapper {
                 .content(excerpt.getContent())
                 .userId(excerpt.getUserId())
                 .sourceTitle(excerpt.getSourceTitle())
-                .bookLanguage(excerpt.getBookLanguage())
-                .bookPageNumber(excerpt.getBookPageNumber())
+                .description(excerpt.getDescription())
+                .publisher(excerpt.getPublisher())
+                .page(excerpt.getPage())
+                .optional(excerpt.getOptional())
+                .publishDate(excerpt.getPublishDate())
                 .tagDtoList(tagDtoList)
+                .image(excerpt.getImage())
                 .build();
     }
 
@@ -44,8 +52,12 @@ public class ExcerptMapper {
                 .content(excerpt.getContent())
                 .userId(excerpt.getUserId())
                 .sourceTitle(excerpt.getSourceTitle())
-                .bookLanguage(excerpt.getBookLanguage())
-                .bookPageNumber(excerpt.getBookPageNumber())
+                .page(excerpt.getPage())
+                .publishDate(excerpt.getPublishDate())
+                .optional(excerpt.getOptional())
+                .description(excerpt.getDescription())
+                .publisher(excerpt.getPublisher())
+                .image(excerpt.getImage())
                 .build();
     }
 }
