@@ -48,14 +48,8 @@ public class SecurityConfig{
                 .headers(x -> x.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(x ->
-                        x.requestMatchers(mvc.pattern("/admin/**")).hasAnyAuthority("ROLE_ADMIN")
-                                .requestMatchers(mvc.pattern("/user/**")).hasAnyAuthority("ROLE_USER")
-                                .requestMatchers(mvc.pattern("/auth/**")).permitAll()
-                                .requestMatchers(mvc.pattern("/tags/**")).permitAll()
-                                .requestMatchers(mvc.pattern("/excerpts/**")).permitAll()
-                                .anyRequest().authenticated()
-                )
+                .authorizeHttpRequests(x -> x.requestMatchers(mvc.pattern("/auth/**")).permitAll())
+                .authorizeHttpRequests(x -> x.anyRequest().permitAll())
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
@@ -85,7 +79,7 @@ public class SecurityConfig{
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));  // Vue.js frontend adresi
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5174"));  // Vue.js frontend adresi
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization", "X-Requested-With"));
         configuration.setAllowCredentials(true);
