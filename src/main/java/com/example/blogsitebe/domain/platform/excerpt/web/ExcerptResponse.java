@@ -10,6 +10,7 @@ public record ExcerptResponse(
         String content,
         String sourceTitle,
         String bookLanguage,
-        String bookPageNumber
+        String bookPageNumber,
+        byte[] photo
 ) {
 }

@@ -15,6 +15,7 @@ public class ExcerptMapper {
         excerpt.setContent(dto.getContent());
         excerpt.setSourceTitle(dto.getSourceTitle());
         excerpt.setBookPageNumber(dto.getBookPageNumber());
+        excerpt.setPhoto(dto.getPhoto());
         return excerpt;
     }
 
@@ -33,6 +34,7 @@ public class ExcerptMapper {
                 .bookLanguage(excerpt.getBookLanguage())
                 .bookPageNumber(excerpt.getBookPageNumber())
                 .tagDtoList(tagDtoList)
+                .photo(excerpt.getPhoto())
                 .build();
     }
 
@@ -46,6 +48,7 @@ public class ExcerptMapper {
                 .sourceTitle(excerpt.getSourceTitle())
                 .bookLanguage(excerpt.getBookLanguage())
                 .bookPageNumber(excerpt.getBookPageNumber())
+                .photo(excerpt.getPhoto())
                 .build();
     }
 }

@@ -20,4 +20,5 @@ public class ExcerptDto{
     private String sourceTitle;
     private String bookLanguage;
     private String bookPageNumber;
+    private byte[] photo;
 }

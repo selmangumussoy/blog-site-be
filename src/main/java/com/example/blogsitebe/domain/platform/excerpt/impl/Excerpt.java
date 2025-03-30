@@ -3,6 +3,7 @@ package com.example.blogsitebe.domain.platform.excerpt.impl;
 import com.example.blogsitebe.library.rest.AbstractEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,8 +24,9 @@ public class Excerpt extends AbstractEntity {
     public static final String COL_SOURCE_TITLE = "source_title";
     public static final String COL_LANGUAGE= "language";
     public static final String COL_PAGE_NUMBER = "page_number";
+    public static final String COL_PHOTO = "photo";
 
-    @Column(name = COL_CONTENT)
+    @Column(name = COL_CONTENT, columnDefinition = "LONGTEXT")
     private String content;
 
     @Column(name = COL_USER_ID)
@@ -38,4 +40,7 @@ public class Excerpt extends AbstractEntity {
 
     @Column(name = COL_PAGE_NUMBER)
     private String bookPageNumber;
+
+    @Column(name = COL_PHOTO, columnDefinition = "LONGBLOB")
+    private byte[] photo;
 }
