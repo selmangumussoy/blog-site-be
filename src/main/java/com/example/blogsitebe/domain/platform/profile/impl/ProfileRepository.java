@@ -1,6 +1,5 @@
-package com.example.blogsitebe.domain.platform.profile;
+package com.example.blogsitebe.domain.platform.profile.impl;
 
-import com.example.blogsitebe.domain.platform.profile.api.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProfileRepository extends JpaRepository<Profile, String> {
