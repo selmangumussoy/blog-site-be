@@ -1,7 +1,7 @@
 package com.example.blogsitebe.domain.auth.user.impl;
 
 import com.example.blogsitebe.domain.auth.user.api.Role;
-import com.example.blogsitebe.domain.platform.profile.ProfileServiceImpl;
+import com.example.blogsitebe.domain.platform.profile.impl.ProfileServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class UserServiceImpl {
     }
 
     private void persistUser(User user) {
-        var profile = profileService.save();
+        var profile = profileService.save(user.getName(),user.getSurname(),user.getEmail());
         user.setProfileId(profile.getId());
     }
     private String formatPhoneNumber(String phoneNumber) {
