@@ -37,6 +37,15 @@ public class TagServiceImpl implements TagService {
     public Page<TagDto> getAll(Pageable pageable) {
         return PageUtil.pageToDto(repository.findAll(pageable),TagMapper::toDto);
     }
+    @Override
+    public TagDto update(String id, TagDto dto) {
+        Tag tag = repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Tag bulunamadı: " + id));
+
+        tag.setName(dto.getName());
+        Tag updated = repository.save(tag);
+        return TagMapper.toDto(updated);
+    }
 
     public List<TagDto> findAll() {
         List<TagDto> tagDtos = new ArrayList<>();
@@ -47,13 +56,6 @@ public class TagServiceImpl implements TagService {
         return tagDtos;
     }
 
-
-    @Override
-    public TagDto update(String id, TagDto dto) {
-        var tag = findById(id).orElseThrow(IllegalArgumentException::new);
-        //TODO
-        return null;
-    }
 
     public Optional<Tag> findById(String tagId) {
         return repository.findById(tagId);
