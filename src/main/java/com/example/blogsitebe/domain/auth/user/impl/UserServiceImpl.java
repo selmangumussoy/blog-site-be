@@ -3,10 +3,14 @@ package com.example.blogsitebe.domain.auth.user.impl;
 import com.example.blogsitebe.domain.auth.user.api.Role;
 import com.example.blogsitebe.domain.auth.user.api.UserDto;
 import com.example.blogsitebe.domain.platform.profile.impl.ProfileServiceImpl;
+import com.example.blogsitebe.library.enums.MessageCodes;
+import com.example.blogsitebe.library.exception.CoreException;
+import com.example.blogsitebe.library.utils.Functions;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.Optional;
 
@@ -26,7 +30,20 @@ public class UserServiceImpl {
     }
 
     public UserDto save(UserDto userDto) {
+        checkUserExist(userDto.getEmail());
+        var profile = profileService.save(userDto.getName(),userDto.getSurname(),userDto.getEmail());
+        userDto.setProfileId(profile.getId());
+        String password = StringUtils.hasLength(userDto.getPassword())
+                ? userDto.getPassword()
+                : Functions.generateRandomPassword();
+        userDto.setPassword(passwordEncoder.encode(password));
         return UserMapper.toDto(repository.save(UserMapper.toEntity(userDto)));
+    }
+
+    private void checkUserExist(String email) {
+     repository.findByEmail(email).ifPresent(user -> {
+                throw new CoreException(MessageCodes.ENTITY_ALREADY_EXISTS, User.class.getSimpleName(), email);
+            });
     }
 
     private void persistUser(User user) {
