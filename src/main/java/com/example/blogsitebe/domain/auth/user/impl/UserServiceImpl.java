@@ -1,6 +1,7 @@
 package com.example.blogsitebe.domain.auth.user.impl;
 
 import com.example.blogsitebe.domain.auth.user.api.Role;
+import com.example.blogsitebe.domain.auth.user.api.UserDto;
 import com.example.blogsitebe.domain.platform.profile.impl.ProfileServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,6 +23,10 @@ public class UserServiceImpl {
         user.setPhoneNumber(formatPhoneNumber(user.getPhoneNumber()));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return repository.save(user);
+    }
+
+    public UserDto save(UserDto userDto) {
+        return UserMapper.toDto(repository.save(UserMapper.toEntity(userDto)));
     }
 
     private void persistUser(User user) {
