@@ -7,10 +7,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-/*
+/**
 UserDetailsService arabirimini
 implement ederek kullanıcı doğrulama işlemleri için kullanıcı detaylarını sağlamak.
-* */
+ */
 @Service
 public class CustomUserDetailService implements UserDetailsService {
     private final UserRepository userRepository;

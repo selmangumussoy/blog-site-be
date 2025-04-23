@@ -16,3 +16,8 @@ spring:
 jwt:
   secret:
     key: "BuCokGuvenliNebahatVeUzunBirSecretKeyYavuz0123456Asli"
+
+management:
+  admin:
+    email: gumussoyhsg@gmail.com
+    password: 12345
