@@ -15,9 +15,11 @@ import java.util.Arrays;
 public class LoggingAspect {
 
     private final HttpServletRequest request;
+    private final LogEntryRepository repository;
 
-    public LoggingAspect(HttpServletRequest request) {
+    public LoggingAspect(HttpServletRequest request, LogEntryRepository repository) {
         this.request = request;
+        this.repository = repository;
     }
 
     @Before("within(@org.springframework.web.bind.annotation.RestController *)")
@@ -26,12 +28,17 @@ public class LoggingAspect {
         String method = request.getMethod();
         String uri = request.getRequestURI();
         String userInfo = getCurrentUserId();
+        String arguments =Arrays.toString(joinPoint.getArgs());
+        String ipaddress=request.getRemoteAddr();
 
-        System.out.println("Giriş Yapıldı:");
-        System.out.println("Http Method: " + method);
-        System.out.println("URI: " + uri);
-        System.out.println("Argüments: " + Arrays.toString(joinPoint.getArgs()));  //metot parametrelerini alır
-        System.out.println("User: " + userInfo);
+        LogEntry entry= LogEntry.builder()
+                .httpMethod(method)
+                .uri(uri)
+                .arguments(arguments)
+                .userId(userInfo)
+                .ipAddress(ipaddress)
+                .build();
+        repository.save(entry);
 
     }
 
@@ -41,7 +48,6 @@ public class LoggingAspect {
         if (principal instanceof CustomUserDetails userDetails) {
             return String.valueOf(userDetails.getId());
         }
-
         return "Anonymous";
     }
 }
