@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+
+  mysql-db:
+    image: mysql:8
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: asim
+      MYSQL_PASSWORD: asim123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  blog-site-be:
+    build: .
+    container_name: blog-site
+    depends_on:
+      - mysql-db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/mydb
+      SPRING_DATASOURCE_USERNAME: asim
+      SPRING_DATASOURCE_PASSWORD: asim123
+    ports:
+      - "8080:8080"
+
+volumes:
+  mysql_data:
