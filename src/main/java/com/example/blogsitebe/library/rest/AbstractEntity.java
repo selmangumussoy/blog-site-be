@@ -3,6 +3,7 @@ package com.example.blogsitebe.library.rest;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -16,6 +17,7 @@ import java.util.Date;
  */
 
 @Getter
+@Setter
 @MappedSuperclass //bu sınıfın bir "temel sınıf" olduğunu belirtir.
 @EqualsAndHashCode(of = "id")
 @EntityListeners(AuditingEntityListener.class)

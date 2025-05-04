@@ -8,4 +8,6 @@ public interface ProfileService {
     ProfileDto update(ProfileDto dto, String id);
 
     List<ProfileDto> getAll();
+
+    ProfileDto getById(String id);
 }
