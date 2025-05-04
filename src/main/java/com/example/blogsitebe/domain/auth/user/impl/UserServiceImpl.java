@@ -2,9 +2,11 @@ package com.example.blogsitebe.domain.auth.user.impl;
 
 import com.example.blogsitebe.domain.auth.user.api.Role;
 import com.example.blogsitebe.domain.auth.user.api.UserDto;
+import com.example.blogsitebe.domain.auth.user.api.UserService;
 import com.example.blogsitebe.domain.platform.profile.impl.ProfileServiceImpl;
 import com.example.blogsitebe.library.enums.MessageCodes;
 import com.example.blogsitebe.library.exception.CoreException;
+import com.example.blogsitebe.library.security.JwtUtil;
 import com.example.blogsitebe.library.utils.Functions;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,7 +18,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService {
     private final UserRepository repository;
     private final ProfileServiceImpl profileService;
     private final PasswordEncoder passwordEncoder;
@@ -31,7 +33,7 @@ public class UserServiceImpl {
 
     public UserDto save(UserDto userDto) {
         checkUserExist(userDto.getEmail());
-        var profile = profileService.save(userDto.getName(),userDto.getSurname(),userDto.getEmail());
+        var profile = profileService.save(userDto.getName(),userDto.getSurname(),userDto.getEmail(), userDto.getPhoneNumber());
         userDto.setProfileId(profile.getId());
         String password = StringUtils.hasLength(userDto.getPassword())
                 ? userDto.getPassword()
@@ -47,7 +49,7 @@ public class UserServiceImpl {
     }
 
     private void persistUser(User user) {
-        var profile = profileService.save(user.getName(),user.getSurname(),user.getEmail());
+        var profile = profileService.save(user.getName(),user.getSurname(),user.getEmail(), user.getPhoneNumber());
         user.setProfileId(profile.getId());
     }
     private String formatPhoneNumber(String phoneNumber) {
@@ -57,5 +59,16 @@ public class UserServiceImpl {
 
     public Optional<User> findByEmailAndRole(String email, Role role) {
         return repository.findByEmailAndRole(email,role);
+    }
+
+    @Override
+    public UserDto getById(String id) {
+        return repository.findById(id).map(UserMapper::toDto)
+                .orElseThrow();
+    }
+
+    @Override
+    public UserDto getMe() {
+        return getById(JwtUtil.extractUserIdAndIfAnonymousThrow());
     }
 }
