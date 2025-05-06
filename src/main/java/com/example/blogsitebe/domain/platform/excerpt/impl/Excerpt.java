@@ -53,6 +53,6 @@ public class Excerpt extends AbstractEntity {
     @Column(name = COL_OPTIONAL)
     private String optional;
 
-    @Column(name = COL_IMAGE)
+    @Column(name = COL_IMAGE , columnDefinition = "LONGTEXT")
     private String image;
 }
