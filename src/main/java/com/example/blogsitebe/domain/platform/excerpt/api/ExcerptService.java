@@ -6,4 +6,6 @@ public interface ExcerptService {
     ExcerptDto save(ExcerptDto excerptDto);
 
     List<ExcerptDto> getAll();
+
+    List<ExcerptDto> getExcerptsByUserId(String id);
 }

@@ -21,6 +21,7 @@ public class ExcerptMapper {
                 .publishDate(request.getPublishDate())
                 .optional(request.getOptional())
                 .image(request.getImage())
+                .userId(request.getUserId())
                 .build();
     }
 
@@ -38,6 +39,7 @@ public class ExcerptMapper {
                 .sourceTitle(excerpt.getSourceTitle())
                 .publisher(excerpt.getPublisher())
                 .image(excerpt.getImage())
+                .userId(excerpt.getUserId())
                 .build();
     }
 

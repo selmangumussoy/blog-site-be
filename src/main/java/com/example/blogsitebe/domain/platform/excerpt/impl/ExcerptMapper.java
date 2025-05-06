@@ -18,7 +18,7 @@ public class ExcerptMapper {
         excerpt.setPublisher(dto.getPublisher());
         excerpt.setPublishDate(dto.getPublishDate());
         excerpt.setDescription(dto.getDescription());
-        excerpt.setImage(excerpt.getImage());
+        excerpt.setImage(dto.getImage());
         return excerpt;
     }
 
