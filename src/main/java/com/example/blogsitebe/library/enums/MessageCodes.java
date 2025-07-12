@@ -5,7 +5,10 @@ import lombok.Getter;
 @Getter
 public enum MessageCodes {
     SUCCESS("200", "general.success"),
-    FAIL("500", "general.fail");
+    FAIL("500", "general.fail"),
+    ENTITY_ALREADY_EXISTS("409", "general.entityAlreadyExists"),
+    TOKEN_EXPIRED("1025", "general.tokenExpired");
+
 
     private final String code;
     private final String message;

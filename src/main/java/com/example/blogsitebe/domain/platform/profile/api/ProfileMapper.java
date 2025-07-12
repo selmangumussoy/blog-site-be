@@ -16,6 +16,9 @@ public class ProfileMapper {
                 .gender(request.getGender())
                 .website(request.getWebsite())
                 .socialLinks(request.getSocialLinks())
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .socialLinks(request.getSocialLinks())
                 .build();
     }
 

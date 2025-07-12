@@ -65,6 +65,16 @@ public class ExcerptServiceImpl implements ExcerptService {
     @Override
     public List<ExcerptDto> getAll() {
         List<Excerpt> excerpts = repository.findAllCustom();
+        return getAllExcerptDto(excerpts);
+    }
+
+    @Override
+    public List<ExcerptDto> getExcerptsByUserId(String id) {
+         List<Excerpt> excerpts = repository.findByUserId(id);
+        return getAllExcerptDto(excerpts);
+    }
+
+    public List<ExcerptDto> getAllExcerptDto(List<Excerpt> excerpts){
         List<ExcerptDto> excerptDtos = new ArrayList<>();
 
         for (Excerpt excerpt : excerpts) {
@@ -90,7 +100,6 @@ public class ExcerptServiceImpl implements ExcerptService {
                     .tagDtoList(tagDtoList)  // TagDto listesi burada yer alacak
                     .build());
         }
-
         return excerptDtos;
     }
 }

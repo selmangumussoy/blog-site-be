@@ -15,13 +15,18 @@ public class ProfileController extends BaseController {
     private final ProfileService service;
 
 
-    @PostMapping("/{id}")
-    public Response<ProfileResponse> update(@PathVariable String id, @RequestBody ProfileUpdateRequest updateRequest) {
+    @PutMapping("/{id}")
+    public Response<ProfileResponse> update(@PathVariable(name = "id") String id, @RequestBody ProfileUpdateRequest updateRequest) {
         return respond(ProfileMapper.toResponse(service.update(ProfileMapper.toDto(updateRequest),id)));
     }
 
     @GetMapping
     public Response<DataResponse<ProfileResponse>> getAll() {
         return respond(ProfileMapper.toResponses(service.getAll()));
+    }
+
+    @GetMapping("/{id}")
+    public Response<ProfileResponse> getById(@PathVariable(name = "id") String id) {
+        return respond(ProfileMapper.toResponse(service.getById(id)));
     }
 }

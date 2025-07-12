@@ -25,4 +25,10 @@ public class ExcerptController extends BaseController {
     public List<ExcerptResponse> getAll() {
         return ExcerptMapper.toResponses(service.getAll());
     }
+
+    @GetMapping("/{id}")
+    List<ExcerptResponse> getExcerptsByUser(@PathVariable(name = "id") String id) {
+        return ExcerptMapper.toResponses(service.getExcerptsByUserId(id));
+    }
+
 }

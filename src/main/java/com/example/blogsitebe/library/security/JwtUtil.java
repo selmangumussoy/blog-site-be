@@ -1,11 +1,15 @@
 package com.example.blogsitebe.library.security;
 
+import com.example.blogsitebe.library.enums.MessageCodes;
+import com.example.blogsitebe.library.exception.CoreException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import java.security.Key;
@@ -17,6 +21,7 @@ import java.util.Map;
 public class JwtUtil {
     @Value("${jwt.secret.key}")
     private String SECRET_KEY = "secret";
+    public static final String UNKNOWN_USER = "unknown";
     private static final String ROLE = "role";
     private static final long JWT_EXPIRATION =  1000 * 60 * 60;
     private static final long ALLOWED_CLOCK_SKEW_SECONDS = 30 * 24 * 60 * 60L;
@@ -42,6 +47,24 @@ public class JwtUtil {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
+    public static String extractUserId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && !authentication.getPrincipal().equals("anonymousUser")) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof UserDetails) {
+                return ((CustomUserDetails) principal).getId();
+            }
+        }
+        return UNKNOWN_USER;
+    }
+
+    public static String extractUserIdAndIfAnonymousThrow() {
+        var userId = extractUserId();
+        if (userId.equals(UNKNOWN_USER)) {
+            throw new CoreException(MessageCodes.TOKEN_EXPIRED);
+        }
+        return userId;
+    }
     ////////////////////////////////////////////////////////////////////////////////
     // Token bilgilerini çekerek valide etme işlemleri //
 

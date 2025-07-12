@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
-/*
+/**
 Spring Security'nin kullanıcı bilgilerini (UserDetails) tanıyabilmesi için özel bir
 kullanıcı detay sınıfı oluşturmak.
 */
@@ -17,6 +17,10 @@ public class CustomUserDetails implements UserDetails {
 
     public CustomUserDetails(User user) {
         this.user = user;
+    }
+
+    public String getId() {
+        return user.getId();
     }
 
     @Override
