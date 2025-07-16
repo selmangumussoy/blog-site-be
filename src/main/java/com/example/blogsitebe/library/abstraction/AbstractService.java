@@ -1,4 +1,4 @@
-package com.example.blogsitebe.library.abstracts;
+package com.example.blogsitebe.library.abstraction;
 
 import java.util.List;
 

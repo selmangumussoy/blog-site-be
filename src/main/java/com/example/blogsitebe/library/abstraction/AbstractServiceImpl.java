@@ -1,13 +1,11 @@
-package com.example.blogsitebe.library.abstracts;
+package com.example.blogsitebe.library.abstraction;
 
 import com.example.blogsitebe.library.enums.MessageCodes;
 import com.example.blogsitebe.library.exception.CoreException;
 import com.example.blogsitebe.library.rest.AbstractEntity;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 public abstract class AbstractServiceImpl<T extends AbstractEntity, D>
