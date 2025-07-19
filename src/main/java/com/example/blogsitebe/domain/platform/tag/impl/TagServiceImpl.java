@@ -8,8 +8,7 @@ import com.example.blogsitebe.library.abstraction.AbstractServiceImpl;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TagServiceImpl extends AbstractServiceImpl <Tag,TagDto> implements TagService {
-
+public class TagServiceImpl extends AbstractServiceImpl<Tag, TagDto> implements TagService {
 
     public TagServiceImpl(AbstractRepository<Tag> repository, AbstractEntityMapper<Tag, TagDto> mapper) {
         super(repository, mapper);
@@ -17,14 +16,12 @@ public class TagServiceImpl extends AbstractServiceImpl <Tag,TagDto> implements 
 
     @Override
     protected String getEntityName() {
-        return  Tag.class.getSimpleName();
+        return Tag.class.getSimpleName();
     }
 
     @Override
     protected void updateEntityFields(Tag tag, TagDto tagDto) {
         tag.setName(tagDto.getName());
         tag.setDescription(tagDto.getDescription());
-        tag.setCreated(tag.getCreated());
-        tag.setModified(tagDto.getModified());
     }
 }
