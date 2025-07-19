@@ -1,39 +1,31 @@
 package com.example.blogsitebe.domain.platform.tag.api;
 
+import com.example.blogsitebe.domain.platform.tag.impl.Tag;
 import com.example.blogsitebe.domain.platform.tag.web.TagRequest;
 import com.example.blogsitebe.domain.platform.tag.web.TagResponse;
-import org.springframework.data.domain.Page;
+import com.example.blogsitebe.library.abstraction.AbstractEntityMapper;
+import com.example.blogsitebe.library.abstraction.AbstractWebMapper;
 
-import java.util.List;
-import java.util.stream.Collectors;
+public class TagMapper implements AbstractEntityMapper<Tag,TagDto>, AbstractWebMapper<TagDto,TagRequest,TagResponse> {
 
-public class TagMapper {
-    public static TagDto toDto(TagRequest request) {
-        return TagDto.builder()
-                .name(request.name())
-                .description(request.description())
-                .build();
-    }
 
-    public static TagResponse toResponse(TagDto dto) {
-        return TagResponse.builder()
-                .id(dto.getId())
-                .description(dto.getDescription())
-                .name(dto.getName())
-                .modified(dto.getModified())
-                .created(dto.getCreated())
-                .build();
-    }
-
-    public static Page<TagResponse> toPageResponse(Page<TagDto> dtos) {
-        //TODO
+    @Override
+    public Tag toEntity(TagDto dto) {
         return null;
     }
 
-    public static List<TagResponse> toResponses(List<TagDto> all) {
-        return all.stream()
-                .map(TagMapper::toResponse)
-                .collect(Collectors.toList());
+    @Override
+    public TagDto entityToDto(Tag entity) {
+        return null;
     }
 
+    @Override
+    public TagDto requestToDto(TagRequest request) {
+        return null;
+    }
+
+    @Override
+    public TagResponse toResponse(TagDto dto) {
+        return null;
+    }
 }
