@@ -3,49 +3,18 @@ package com.example.blogsitebe.domain.platform.tag.web;
 import com.example.blogsitebe.domain.platform.tag.api.TagDto;
 import com.example.blogsitebe.domain.platform.tag.api.TagMapper;
 import com.example.blogsitebe.domain.platform.tag.api.TagService;
+import com.example.blogsitebe.library.abstraction.AbstractController;
+import com.example.blogsitebe.library.abstraction.AbstractService;
+import com.example.blogsitebe.library.abstraction.AbstractWebMapper;
 import com.example.blogsitebe.library.rest.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/tags")
-@RequiredArgsConstructor
-public class TagController extends BaseController {
-    private final TagService service;
+public class TagController extends AbstractController<TagDto,TagRequest,TagResponse> {
 
-    @PostMapping
-    public Response<TagResponse> save(@RequestBody TagRequest request) {
-        return respond(TagMapper.toResponse(service.save(TagMapper.toDto(request))));
-    }
-
-//    @GetMapping
-//    public Response<PageResponse<TagResponse>> filter(Pageable pageable) {
-//        //TODO
-//        return null;
-//    }
-
-//    @GetMapping
-//    public Response<PageResponse<TagResponse>> getAll(Pageable pageable) {
-//        return respond(TagMapper.toPageResponse(service.getAll(pageable)));
-//    }
-    @GetMapping
-    public Response<DataResponse<TagResponse>> findAll() {
-        return respond(TagMapper.toResponses(service.findAll()));
-    }
-
-    @GetMapping("/{id}")
-    public Response<TagResponse> getById(@PathVariable String id) {
-        return respond(TagMapper.toResponse(service.getById(id)));
-    }
-
-    @PutMapping("/{id}")
-    public Response<TagResponse> update(@PathVariable String id, @RequestBody TagDto dto) {
-        return respond(TagMapper.toResponse(service.update(id,dto)));
-    }
-
-    @DeleteMapping("/{id}")
-    public Response<Void> delete(@PathVariable String id) {
-        service.delete(id);
-        return new Response<>(MetaResponse.success());
+    public TagController(AbstractService<TagDto> service, AbstractWebMapper<TagDto, TagRequest, TagResponse> mapper) {
+        super(service, mapper);
     }
 }

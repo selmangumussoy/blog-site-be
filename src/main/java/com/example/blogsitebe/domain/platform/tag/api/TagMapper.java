@@ -1,39 +1,50 @@
 package com.example.blogsitebe.domain.platform.tag.api;
 
+import com.example.blogsitebe.domain.platform.tag.impl.Tag;
 import com.example.blogsitebe.domain.platform.tag.web.TagRequest;
 import com.example.blogsitebe.domain.platform.tag.web.TagResponse;
-import org.springframework.data.domain.Page;
+import com.example.blogsitebe.library.abstraction.AbstractEntityMapper;
+import com.example.blogsitebe.library.abstraction.AbstractWebMapper;
+import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.stream.Collectors;
+@Component
+public class TagMapper implements AbstractEntityMapper<Tag, TagDto>, AbstractWebMapper<TagDto, TagRequest, TagResponse> {
 
-public class TagMapper {
-    public static TagDto toDto(TagRequest request) {
+    @Override
+    public Tag toEntity(TagDto dto) {
+        Tag tag = new Tag();
+        tag.setName(dto.getName());
+        tag.setDescription(dto.getDescription());
+        return tag;
+    }
+
+    @Override
+    public TagDto entityToDto(Tag entity) {
+        return TagDto.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .description(entity.getDescription())
+                .created(entity.getCreated())
+                .modified(entity.getModified())
+                .build();
+    }
+
+    @Override
+    public TagDto requestToDto(TagRequest request) {
         return TagDto.builder()
                 .name(request.name())
                 .description(request.description())
                 .build();
     }
 
-    public static TagResponse toResponse(TagDto dto) {
+    @Override
+    public TagResponse toResponse(TagDto dto) {
         return TagResponse.builder()
                 .id(dto.getId())
-                .description(dto.getDescription())
                 .name(dto.getName())
-                .modified(dto.getModified())
+                .description(dto.getDescription())
                 .created(dto.getCreated())
+                .modified(dto.getModified())
                 .build();
     }
-
-    public static Page<TagResponse> toPageResponse(Page<TagDto> dtos) {
-        //TODO
-        return null;
-    }
-
-    public static List<TagResponse> toResponses(List<TagDto> all) {
-        return all.stream()
-                .map(TagMapper::toResponse)
-                .collect(Collectors.toList());
-    }
-
 }
