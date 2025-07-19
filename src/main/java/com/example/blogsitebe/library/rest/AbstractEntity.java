@@ -17,6 +17,7 @@ import java.util.Date;
  */
 
 @Getter
+@Setter   //Silinecek
 @MappedSuperclass //bu sınıfın bir "temel sınıf" olduğunu belirtir.
 @EqualsAndHashCode(of = "id")
 @EntityListeners(AuditingEntityListener.class)
