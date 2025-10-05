@@ -1,17 +1,14 @@
 package com.example.blogsitebe.domain.platform.tag.api;
 
+import com.example.blogsitebe.library.abstraction.AbstractDto;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
+
 import java.util.Date;
 
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
-public class TagDto{
-    private String id;
-    private Date created;
-    private Date modified;
+@Data
+@SuperBuilder
+public class TagDto extends AbstractDto {
     private String name;
     private String description;
 }
