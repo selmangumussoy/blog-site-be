@@ -46,6 +46,6 @@ public class DefaultUserCreator {
                                 .build()))
         );
         log.info("Created default user: {}", userDto.get());
-    }
+}
 
 }

@@ -1,14 +1,9 @@
 package com.example.blogsitebe.domain.platform.post.impl;
 
+import com.example.blogsitebe.domain.platform.post.api.PostType;
 import com.example.blogsitebe.library.rest.AbstractEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Lob;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @AllArgsConstructor
@@ -17,28 +12,41 @@ import lombok.Setter;
 @Setter
 @Table(name = Post.TABLE)
 public class Post extends AbstractEntity {
+
     public static final String TABLE = "post";
-    public static final String COL_TITLE = "title";
+    public static final String COL_TYPE = "type";
+    public static final String COL_PARENT_ID = "parent_id";
+    public static final String COL_USER_ID = "user_id";
     public static final String COL_CONTENT = "content";
-    public static final String COL_AUTHOR = "author";
-    public static final String COL_COVER_IMAGE = "cover_image";
-    public static final String COL_PUBLISHED = "published";
+    public static final String COL_TAG_ID = "tag_id";
+    public static final String COL_LIKE_COUNT = "like_count";
+    public static final String COL_COMMENT_COUNT = "comment_count";
 
-    @Column(name = COL_TITLE, nullable = false)
-    private String title;
+    // Enum tipi
+    @Enumerated(EnumType.STRING)
+    @Column(name = COL_TYPE, nullable = false)
+    private PostType type;
 
+    // Orijinal post ilişkisi (örneğin Repost)
+    @Column(name = COL_PARENT_ID)
+    private Long parentId;
 
-    @Column(name = COL_CONTENT, nullable = false, columnDefinition = "TEXT")
+    // Post sahibi kullanıcı ID
+    @Column(name = COL_USER_ID, nullable = false)
+    private Long userId;
+
+    // Post içeriği
+    @Column(name = COL_CONTENT, columnDefinition = "TEXT")
     private String content;
 
-    @Column(name = COL_AUTHOR)
-    private String author;
+    // Etiket ilişkisi
+    @Column(name = COL_TAG_ID)
+    private Long tagId;
 
-    @Column(name = COL_COVER_IMAGE)
-    private String coverImage;
+    // Sayaçlar
+    @Column(name = COL_LIKE_COUNT)
+    private Integer likeCount = 0;
 
-    @Column(name = COL_PUBLISHED, nullable = false)
-    private Boolean published = false;
-
-
+    @Column(name = COL_COMMENT_COUNT)
+    private Integer commentCount = 0;
 }

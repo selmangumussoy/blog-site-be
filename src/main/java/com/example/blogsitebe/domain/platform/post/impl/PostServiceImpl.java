@@ -12,16 +12,20 @@ public class PostServiceImpl extends AbstractServiceImpl<Post, PostDto> implemen
     public PostServiceImpl(PostRepository repository, PostMapper mapper) {
         super(repository, mapper);
     }
+
     @Override
     protected String getEntityName() {
         return "Post";
     }
+
     @Override
     protected void updateEntityFields(Post entity, PostDto dto) {
-        entity.setTitle(dto.getTitle());
+        entity.setType(dto.getType());
+        entity.setParentId(dto.getParentId());
+        entity.setUserId(dto.getUserId());
         entity.setContent(dto.getContent());
-        entity.setAuthor(dto.getAuthor());
-        entity.setCoverImage(dto.getCoverImage());
-        entity.setPublished(dto.getPublished());
+        entity.setTagId(dto.getTagId());
+        entity.setLikeCount(dto.getLikeCount());
+        entity.setCommentCount(dto.getCommentCount());
     }
 }

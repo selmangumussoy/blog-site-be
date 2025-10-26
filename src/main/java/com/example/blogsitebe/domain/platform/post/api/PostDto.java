@@ -7,9 +7,11 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 public class PostDto extends AbstractDto {
-    private String title;
+    private PostType type;
+    private Long parentId;
+    private Long userId;
     private String content;
-    private String author;
-    private String coverImage;
-    private Boolean published;
+    private Long tagId;
+    private Integer likeCount;
+    private Integer commentCount;
 }

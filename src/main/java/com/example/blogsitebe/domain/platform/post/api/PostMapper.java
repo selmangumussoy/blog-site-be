@@ -9,15 +9,20 @@ import org.apache.catalina.mapper.Mapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PostMapper implements AbstractEntityMapper<Post,PostDto>, AbstractWebMapper<PostDto, PostRequest, PostResponse> {
+public class PostMapper implements
+        AbstractEntityMapper<Post, PostDto>,
+        AbstractWebMapper<PostDto, PostRequest, PostResponse> {
+
     @Override
     public Post toEntity(PostDto dto) {
         Post e = new Post();
-        e.setTitle(dto.getTitle());
+        e.setType(dto.getType());
+        e.setParentId(dto.getParentId());
+        e.setUserId(dto.getUserId());
         e.setContent(dto.getContent());
-        e.setAuthor(dto.getAuthor());
-        e.setCoverImage(dto.getCoverImage());
-        e.setPublished(dto.getPublished());
+        e.setTagId(dto.getTagId());
+        e.setLikeCount(dto.getLikeCount());
+        e.setCommentCount(dto.getCommentCount());
         return e;
     }
 
@@ -27,22 +32,26 @@ public class PostMapper implements AbstractEntityMapper<Post,PostDto>, AbstractW
                 .id(entity.getId())
                 .created(entity.getCreated())
                 .modified(entity.getModified())
-                .title(entity.getTitle())
+                .type(entity.getType())
+                .parentId(entity.getParentId())
+                .userId(entity.getUserId())
                 .content(entity.getContent())
-                .author(entity.getAuthor())
-                .coverImage(entity.getCoverImage())
-                .published(entity.getPublished())
+                .tagId(entity.getTagId())
+                .likeCount(entity.getLikeCount())
+                .commentCount(entity.getCommentCount())
                 .build();
     }
-    // Web katmanı
+
     @Override
     public PostDto requestToDto(PostRequest req) {
         return PostDto.builder()
-                .title(req.getTitle())
+                .type(req.getType())
+                .parentId(req.getParentId())
+                .userId(req.getUserId())
                 .content(req.getContent())
-                .author(req.getAuthor())
-                .coverImage(req.getCoverImage())
-                .published(req.getPublished())
+                .tagId(req.getTagId())
+                .likeCount(req.getLikeCount())
+                .commentCount(req.getCommentCount())
                 .build();
     }
 
@@ -52,11 +61,13 @@ public class PostMapper implements AbstractEntityMapper<Post,PostDto>, AbstractW
                 .id(dto.getId())
                 .created(dto.getCreated())
                 .modified(dto.getModified())
-                .title(dto.getTitle())
+                .type(dto.getType())
+                .parentId(dto.getParentId())
+                .userId(dto.getUserId())
                 .content(dto.getContent())
-                .author(dto.getAuthor())
-                .coverImage(dto.getCoverImage())
-                .published(dto.getPublished())
+                .tagId(dto.getTagId())
+                .likeCount(dto.getLikeCount())
+                .commentCount(dto.getCommentCount())
                 .build();
     }
 }
