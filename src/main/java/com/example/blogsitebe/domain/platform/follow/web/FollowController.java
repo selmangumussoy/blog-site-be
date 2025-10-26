@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/follows")
+@RequestMapping("/api/follows")
 public class FollowController  extends AbstractController<FollowDto, FollowRequest, FollowResponse> {
     public FollowController(FollowService service, FollowMapper mapper) {
         super(service, mapper);
