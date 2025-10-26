@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostImageRequest {
-    private Long postId;
+    private String postId;
     private String url;
     private Integer orderIndex;
 }

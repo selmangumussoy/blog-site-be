@@ -8,5 +8,5 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 public class ThoughtResponse extends AbstractResponse {
-    private Long postId;
+    private String postId;
 }

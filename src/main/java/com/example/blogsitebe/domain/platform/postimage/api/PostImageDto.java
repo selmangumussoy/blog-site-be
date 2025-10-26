@@ -7,7 +7,7 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 public class PostImageDto extends AbstractDto {
-    private Long postId;
+    private String postId;
     private String url;
     private Integer orderIndex;
 }

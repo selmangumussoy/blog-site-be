@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ThoughtRequest {
-    private Long postId;
+    private String postId;
 }
