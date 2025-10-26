@@ -6,5 +6,5 @@ import java.util.List;
 
 @Repository
 public interface PostImageRepository extends AbstractRepository<PostImage> {
-    List<PostImage> findAllByPostIdOrderByOrderIndexAsc(Long postId);
+    List<PostImage> findAllByPostIdOrderByOrderIndexAsc(String postId);
 }

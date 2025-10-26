@@ -1,4 +1,4 @@
-package com.example.blogsitebe.domain.platform.postimage.api;
+package com.example.blogsitebe.domain.platform.like.api;
 
 import com.example.blogsitebe.library.abstraction.AbstractDto;
 import lombok.Data;
@@ -6,8 +6,7 @@ import lombok.experimental.SuperBuilder;
 
 @Data
 @SuperBuilder
-public class PostImageDto extends AbstractDto {
+public class LikeDto extends AbstractDto{
+    private String userId;
     private String postId;
-    private String url;
-    private Integer orderIndex;
 }

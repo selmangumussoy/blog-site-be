@@ -19,7 +19,7 @@ public class PostImage extends AbstractEntity {
     public static final String COL_ORDER_INDEX = "order_index";
 
     @Column(name = COL_POST_ID, nullable = false)
-    private Long postId; // hangi post’a ait
+    private String postId; // hangi post’a ait
 
     @Column(name = COL_URL, nullable = false)
     private String url; // dosya erişim URL’si (S3, CDN vs.)

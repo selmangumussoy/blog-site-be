@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/post-images")
+@RequestMapping("/api/post-images")
 public class PostImageController extends AbstractController<PostImageDto, PostImageRequest, PostImageResponse> {
 
     private final PostImageService postImageService;
@@ -20,7 +20,7 @@ public class PostImageController extends AbstractController<PostImageDto, PostIm
     }
 
     @GetMapping("/post/{postId}")
-    public List<PostImageResponse> getImagesByPost(@PathVariable Long postId) {
+    public List<PostImageResponse> getImagesByPost(@PathVariable String postId) {
         return postImageService.findByPostId(postId)
                 .stream()
                 .map(dto -> mapper.toResponse(dto))

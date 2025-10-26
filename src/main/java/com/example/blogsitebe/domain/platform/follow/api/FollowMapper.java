@@ -5,7 +5,6 @@ import com.example.blogsitebe.domain.platform.follow.web.FollowRequest;
 import com.example.blogsitebe.domain.platform.follow.web.FollowResponse;
 import com.example.blogsitebe.library.abstraction.AbstractEntityMapper;
 import com.example.blogsitebe.library.abstraction.AbstractWebMapper;
-import jakarta.persistence.Column;
 import org.springframework.stereotype.Component;
 
 @Component

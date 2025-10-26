@@ -7,5 +7,5 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 public class ThoughtDto extends AbstractDto {
-    private Long postId;
+    private String postId;
 }

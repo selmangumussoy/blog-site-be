@@ -1,4 +1,4 @@
-package com.example.blogsitebe.domain.platform.thoughtentity.web;
+package com.example.blogsitebe.domain.platform.like.web;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ThoughtRequest {
+public class LikeRequest {
+    private String userId;
     private String postId;
 }

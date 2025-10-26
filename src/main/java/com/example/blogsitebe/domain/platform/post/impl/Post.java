@@ -29,11 +29,11 @@ public class Post extends AbstractEntity {
 
     // Orijinal post ilişkisi (örneğin Repost)
     @Column(name = COL_PARENT_ID)
-    private Long parentId;
+    private String parentId;
 
     // Post sahibi kullanıcı ID
     @Column(name = COL_USER_ID, nullable = false)
-    private Long userId;
+    private String userId;
 
     // Post içeriği
     @Column(name = COL_CONTENT, columnDefinition = "TEXT")
@@ -41,7 +41,7 @@ public class Post extends AbstractEntity {
 
     // Etiket ilişkisi
     @Column(name = COL_TAG_ID)
-    private Long tagId;
+    private String tagId;
 
     // Sayaçlar
     @Column(name = COL_LIKE_COUNT)

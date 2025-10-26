@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PostRequest {
     private PostType type;
-    private Long parentId;
-    private Long userId;
+    private String parentId;
+    private String userId;
     private String content;
-    private Long tagId;
+    private String tagId;
     private Integer likeCount;
     private Integer commentCount;
 }

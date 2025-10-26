@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/posts")
+@RequestMapping("/api/posts")
 public class PostController extends AbstractController<PostDto,PostRequest,PostResponse> {
     public PostController(PostService service, PostMapper mapper) {
         super(service, mapper);

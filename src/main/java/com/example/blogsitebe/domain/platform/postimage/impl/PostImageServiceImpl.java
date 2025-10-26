@@ -33,7 +33,7 @@ public class PostImageServiceImpl extends AbstractServiceImpl<PostImage, PostIma
     }
 
     @Override
-    public List<PostImageDto> findByPostId(Long postId) {
+    public List<PostImageDto> findByPostId(String postId) {
         return mapper.entityListToDtoList(postImageRepository.findAllByPostIdOrderByOrderIndexAsc(postId));
     }
 }

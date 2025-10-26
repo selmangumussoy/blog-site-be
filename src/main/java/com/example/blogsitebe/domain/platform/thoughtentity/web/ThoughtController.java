@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/thoughts")
+@RequestMapping("/api/thoughts")
 public class ThoughtController extends AbstractController<ThoughtDto, ThoughtRequest, ThoughtResponse> {
     public ThoughtController(ThoughtService service, ThoughtMapper mapper) {
         super(service, mapper);
