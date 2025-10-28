@@ -26,6 +26,8 @@ public class QuotePost  extends AbstractEntity {
     public static final String COL_PUBLISHER = "publisher";
     public static final String COL_TOTAL_PAGES = "total_pages";
     public static final String COL_THOUGHT = "thought";
+    public static final String COL_POST_ID = "post_id";
+
 
     @Column(name = COL_TITLE, nullable = false)
     private String title;
@@ -47,4 +49,10 @@ public class QuotePost  extends AbstractEntity {
 
     @Column(name = COL_THOUGHT, columnDefinition = "TEXT")
     private String thought;
+
+    @Column(name = COL_POST_ID, nullable = false)
+    private String postId;
 }
+
+
+

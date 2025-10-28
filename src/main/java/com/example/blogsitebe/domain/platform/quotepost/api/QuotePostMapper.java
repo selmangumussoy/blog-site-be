@@ -25,6 +25,7 @@ public class QuotePostMapper implements
                 .publisher(entity.getPublisher())
                 .totalPages(entity.getTotalPages())
                 .thought(entity.getThought())
+                .postId(entity.getPostId())
                 .build();
     }
 
@@ -39,6 +40,7 @@ public class QuotePostMapper implements
         e.setPublisher(dto.getPublisher());
         e.setTotalPages(dto.getTotalPages());
         e.setThought(dto.getThought());
+        e.setPostId(dto.getPostId());
         return e;
     }
 
@@ -53,6 +55,7 @@ public class QuotePostMapper implements
                 .publisher(req.getPublisher())
                 .totalPages(req.getTotalPages())
                 .thought(req.getThought())
+                .postId(req.getPostId())
                 .build();
     }
 
@@ -70,6 +73,7 @@ public class QuotePostMapper implements
                 .publisher(dto.getPublisher())
                 .totalPages(dto.getTotalPages())
                 .thought(dto.getThought())
+                .postId(dto.getPostId())
                 .build();
     }
 }

@@ -17,4 +17,6 @@ public class QuotePostRequest {
     private String publisher;
     private Integer totalPages;
     private String thought;
+    private String postId;
+
 }

@@ -15,5 +15,7 @@ public class QuotePostResponse extends AbstractResponse {
     private String publisher;
     private Integer totalPages;
     private String thought;
+    private String postId;
+
 
 }

@@ -1,6 +1,7 @@
 package com.example.blogsitebe.domain.platform.quotepost.api;
 
 import com.example.blogsitebe.library.abstraction.AbstractDto;
+import com.example.blogsitebe.library.abstraction.AbstractResponse;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 
@@ -14,4 +15,7 @@ public class QuotePostDto extends AbstractDto {
     private String publisher;
     private Integer totalPages;
     private String thought;
+    private String postId;
+
 }
+
