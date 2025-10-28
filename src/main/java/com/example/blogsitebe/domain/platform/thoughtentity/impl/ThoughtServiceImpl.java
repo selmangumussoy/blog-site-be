@@ -21,6 +21,9 @@ public class ThoughtServiceImpl extends AbstractServiceImpl<Thought, ThoughtDto>
 
     @Override
     protected void updateEntityFields(Thought entity, ThoughtDto dto) {
+
         entity.setPostId(dto.getPostId());
+        entity.setContent(dto.getContent());
+        entity.setFeeling(dto.getFeeling());
     }
 }

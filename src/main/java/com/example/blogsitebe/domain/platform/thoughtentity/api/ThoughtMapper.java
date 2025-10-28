@@ -18,6 +18,8 @@ public class ThoughtMapper implements
     public Thought toEntity(ThoughtDto dto) {
         Thought e = new Thought();
         e.setPostId(dto.getPostId());
+        e.setContent(dto.getContent());
+        e.setFeeling(dto.getFeeling());
         return e;
     }
 
@@ -28,6 +30,8 @@ public class ThoughtMapper implements
                 .created(entity.getCreated())
                 .modified(entity.getModified())
                 .postId(entity.getPostId())
+                .content(entity.getContent())
+                .feeling(entity.getFeeling())
                 .build();
     }
 
@@ -36,6 +40,8 @@ public class ThoughtMapper implements
     public ThoughtDto requestToDto(ThoughtRequest req) {
         return ThoughtDto.builder()
                 .postId(req.getPostId())
+                .content(req.getContent())   // NEW
+                .feeling(req.getFeeling())
                 .build();
     }
 
@@ -46,6 +52,8 @@ public class ThoughtMapper implements
                 .created(dto.getCreated())
                 .modified(dto.getModified())
                 .postId(dto.getPostId())
+                .content(dto.getContent())   // NEW
+                .feeling(dto.getFeeling())   // NEW
                 .build();
     }
 }

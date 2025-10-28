@@ -9,4 +9,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class ThoughtResponse extends AbstractResponse {
     private String postId;
+    private String content;   // NEW
+    private String feeling;
 }
