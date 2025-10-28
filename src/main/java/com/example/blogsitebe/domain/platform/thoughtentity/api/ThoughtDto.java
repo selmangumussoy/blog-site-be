@@ -8,4 +8,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class ThoughtDto extends AbstractDto {
     private String postId;
+    private String content;   // NEW
+    private String feeling;
 }

@@ -11,4 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ThoughtRequest {
     private String postId;
+    private String content;
+    private String feeling;
 }
