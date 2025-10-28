@@ -8,8 +8,6 @@ import lombok.*;
 @Getter
 @Setter
 public class ProfileUpdateRequest {
-    private String firstName;
-    private String lastName;
     private String email;
     private String phone;
     private String picture;
@@ -18,4 +16,6 @@ public class ProfileUpdateRequest {
     private String gender;
     private String website;
     private String socialLinks;
+    private String name;
+    private String username;
 }

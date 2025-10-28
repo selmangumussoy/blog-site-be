@@ -18,13 +18,11 @@ import java.util.concurrent.atomic.AtomicReference;
 public class DefaultUserCreator {
     private final UserServiceImpl userService;
 
-    @Value("${management.admin.email}")
-    private String adminEmail;
-
     @Value("${management.admin.password}")
     private String adminPassword;
 
-    private final String ADMIN_NAME = "Admin Asım";
+    private final String ADMIN_FULL_NAME = "Admin Asım";
+    private final String ADMIN_USER_NAME = "Admin";
 
 
 
@@ -33,13 +31,12 @@ public class DefaultUserCreator {
     @Order(0)
     public void createDefaultUser() {
         AtomicReference<UserDto> userDto = new AtomicReference<>();
-        userService.findByEmailAndRole(adminEmail, Role.ROLE_ADMIN).ifPresentOrElse(user ->
+        userService.findByUserNameAndRole(ADMIN_USER_NAME, Role.ROLE_ADMIN).ifPresentOrElse(user ->
                             userDto.set(UserMapper.toDto(user))
                 ,
                 ()->
                         userDto.set(userService.save(UserDto.builder()
-                                .name(ADMIN_NAME)
-                                .email(adminEmail)
+                                .fullName(ADMIN_FULL_NAME)
                                 .password(adminPassword)
                                 .role(Role.ROLE_ADMIN)
                                 .phoneNumber("null")

@@ -17,9 +17,9 @@ import lombok.Setter;
 @Table(name = Profile.TABLE)
 public class Profile extends AbstractEntity {
     public static final String TABLE = "profile";
-    public static final String COL_FIRST_NAME = "first_name";
-    public static final String COL_LAST_NAME = "last_name";
     public static final String COL_EMAIL = "email";
+    public static final String COL_NAME = "name";
+    public static final String COL_USERNAME = "username";
     public static final String COL_PHONE = "phone";
     public static final String COL_PICTURE = "picture";
     public static final String COL_BIO = "bio";
@@ -28,14 +28,15 @@ public class Profile extends AbstractEntity {
     public static final String COL_WEBSITE = "website";
     public static final String COL_SOCIAL_LINKS = "social_links";
 
-    @Column(name = COL_FIRST_NAME)
-    private String firstName;
-
-    @Column(name = COL_LAST_NAME)
-    private String lastName;
 
     @Column(name = COL_EMAIL)
     private String email;
+
+    @Column(name = COL_NAME)
+    private String name;
+
+    @Column(name = COL_USERNAME)
+    private String username;
 
     @Column(name = COL_PHONE)
     private String phone;

@@ -6,12 +6,10 @@ public class UserMapper {
     public static UserResponse toResponse(UserDto userDto) {
         return UserResponse.builder()
                 .profileId(userDto.getProfileId())
-                .name(userDto.getName())
-                .email(userDto.getEmail())
                 .role(userDto.getRole())
-                .surname(userDto.getSurname())
-                .password(userDto.getPassword())
+                .userName(userDto.getUserName())
                 .phoneNumber(userDto.getPhoneNumber())
+                .fullName(userDto.getFullName())
                 .build();
     }
 }

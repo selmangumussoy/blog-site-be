@@ -2,6 +2,8 @@ package com.example.blogsitebe.domain.auth.user.web;
 
 import com.example.blogsitebe.domain.auth.user.api.UserMapper;
 import com.example.blogsitebe.domain.auth.user.api.UserService;
+import com.example.blogsitebe.domain.platform.profile.api.ProfileMapper;
+import com.example.blogsitebe.domain.platform.profile.web.ProfileResponse;
 import com.example.blogsitebe.library.rest.BaseController;
 import com.example.blogsitebe.library.rest.Response;
 import lombok.RequiredArgsConstructor;
@@ -24,5 +26,10 @@ public class UserController extends BaseController {
     @GetMapping("/me")
     public Response<UserResponse> getMe() {
         return respond(UserMapper.toResponse(service.getMe()));
+    }
+
+    @GetMapping("/profile-me")
+    public Response<ProfileResponse> getMeProfile() {
+        return respond(ProfileMapper.toResponse(service.getMeProfile()));
     }
 }

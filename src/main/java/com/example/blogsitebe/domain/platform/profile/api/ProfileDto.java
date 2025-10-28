@@ -1,20 +1,14 @@
 package com.example.blogsitebe.domain.platform.profile.api;
 
+import com.example.blogsitebe.library.abstraction.AbstractDto;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@Builder
-public class ProfileDto {
-    private String id;
-    private Date created;
-    private Date modified;
-    private String firstName;
-    private String lastName;
+@Data
+@SuperBuilder
+public class ProfileDto extends AbstractDto {
     private String email;
     private String phone;
     private String picture;
@@ -23,4 +17,6 @@ public class ProfileDto {
     private String gender;
     private String website;
     private String socialLinks;
+    private String name;
+    private String username;
 }

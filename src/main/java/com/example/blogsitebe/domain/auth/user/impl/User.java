@@ -13,22 +13,13 @@ import lombok.*;
 @Table(name = User.TABLE)
 public class User extends AbstractEntity {
     public static final String TABLE = "users";
-    private static final String COL_NAME = "name";
-    private static final String COL_EMAIL = "email";
-    private static final String COL_SURNAME = "surname";
     private static final String COL_PASSWORD = "password";
     private static final String COL_PHONE_NUMBER = "phone_number";
     private static final String COL_ROLE = "role";
     private static final String COL_PROFILE_ID = "profile_id";
+    private static final String COL_USERNAME = "username";
+    private static final String COL_FULL_NAME = "full_name";
 
-    @Column(name = COL_NAME)
-    private String name;
-
-    @Column(name = COL_SURNAME)
-    private String surname;
-
-    @Column(name = COL_EMAIL)
-    private String email;
 
     @Column(name = COL_PASSWORD, nullable = false)
     private String password;
@@ -42,4 +33,10 @@ public class User extends AbstractEntity {
 
     @Column(name = COL_PROFILE_ID)
     private String profileId;
+
+    @Column(name = COL_USERNAME)
+    private String userName;
+
+    @Column(name = COL_FULL_NAME)
+    private String fullName;
 }

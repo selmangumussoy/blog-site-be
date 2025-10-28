@@ -1,7 +1,12 @@
 package com.example.blogsitebe.domain.platform.profile.impl;
 
+import com.example.blogsitebe.domain.auth.user.api.UserDto;
+import com.example.blogsitebe.domain.auth.user.api.UserService;
 import com.example.blogsitebe.domain.platform.profile.api.ProfileDto;
 import com.example.blogsitebe.domain.platform.profile.api.ProfileService;
+import com.example.blogsitebe.library.enums.MessageCodes;
+import com.example.blogsitebe.library.exception.CoreException;
+import com.example.blogsitebe.library.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +17,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProfileServiceImpl implements ProfileService {
     private final ProfileRepository repository;
-    public Profile save(String firstName, String lastName, String email, String phone) {
+
+    @Override
+    public ProfileDto save(String userName, String fullName, String phone) {
         Profile profile = new Profile();
-        profile.setFirstName(firstName);
-        profile.setLastName(lastName);
-        profile.setEmail(email);
+        profile.setUsername(userName);
+        profile.setName(fullName);
         profile.setPhone(phone);
-        return repository.save(profile);
+
+        Profile saved = repository.save(profile);
+        return ProfileMapper.toDto(saved);
     }
 
     public ProfileDto update(ProfileDto dto, String id) {

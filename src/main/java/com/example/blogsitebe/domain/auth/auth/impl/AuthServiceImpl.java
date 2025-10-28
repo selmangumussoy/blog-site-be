@@ -37,9 +37,9 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public TokenDto login(LoginDto dto) {
-        Optional<User> user = userService.findByEmailAndRole(dto.username(), dto.role());
+        Optional<User> user = userService.findByUserNameAndRole(dto.getUsername(), dto.getRole());
 
-        if (user.isPresent() && passwordEncoder.matches(dto.password(), user.get().getPassword())) {
+        if (user.isPresent() && passwordEncoder.matches(dto.getPassword(), user.get().getPassword())) {
             return generateToken(user.get());
         }
         return null;
@@ -49,7 +49,7 @@ public class AuthServiceImpl implements AuthService {
         List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(user.getRole().toString()));
 
         UserDetails userDetails = org.springframework.security.core.userdetails.User.builder()
-                .username(user.getEmail())
+                .username(user.getUserName())
                 .password(user.getPassword())
                 .authorities(authorities)
                 .build();

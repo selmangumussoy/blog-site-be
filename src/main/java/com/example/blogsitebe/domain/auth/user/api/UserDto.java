@@ -1,19 +1,16 @@
 package com.example.blogsitebe.domain.auth.user.api;
 
+import com.example.blogsitebe.library.abstraction.AbstractDto;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@Builder
-public class UserDto {
-    private String name;
-    private String surname;
-    private String email;
+@Data
+@SuperBuilder
+public class UserDto extends AbstractDto {
     private String password;
     private String phoneNumber;
     private Role role;
     private String profileId;
-
+    private String userName;
+    private String fullName;
 }

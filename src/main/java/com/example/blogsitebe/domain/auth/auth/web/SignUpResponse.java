@@ -1,6 +1,12 @@
 package com.example.blogsitebe.domain.auth.auth.web;
 
-public record SignUpResponse(
-        String token
-) {
+import lombok.*;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
+public class SignUpResponse {
+    String token;
 }

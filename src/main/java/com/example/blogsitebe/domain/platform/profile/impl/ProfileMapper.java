@@ -7,8 +7,6 @@ public class ProfileMapper {
         Profile entity = new Profile();
         entity.setBirthDay(dto.getBirthDay());
         entity.setEmail(dto.getEmail());
-        entity.setFirstName(dto.getFirstName());
-        entity.setLastName(dto.getLastName());
         entity.setPhone(dto.getPhone());
         entity.setWebsite(dto.getWebsite());
         entity.setPicture(dto.getPicture());
@@ -17,6 +15,8 @@ public class ProfileMapper {
         entity.setModified(dto.getModified());
         entity.setCreated(dto.getCreated());
         entity.setSocialLinks(dto.getSocialLinks());
+        entity.setUsername(dto.getUsername());
+        entity.setName(dto.getName());
         return entity;
     }
 
@@ -31,10 +31,10 @@ public class ProfileMapper {
                 .created(profile.getCreated())
                 .website(profile.getWebsite())
                 .birthDay(profile.getBirthDay())
-                .firstName(profile.getFirstName())
                 .socialLinks(profile.getSocialLinks())
-                .lastName(profile.getLastName())
                 .gender(profile.getGender())
+                .username(profile.getUsername())
+                .name(profile.getName())
                 .build();
 
     }

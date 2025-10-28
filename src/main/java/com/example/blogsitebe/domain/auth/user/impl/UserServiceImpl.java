@@ -3,6 +3,8 @@ package com.example.blogsitebe.domain.auth.user.impl;
 import com.example.blogsitebe.domain.auth.user.api.Role;
 import com.example.blogsitebe.domain.auth.user.api.UserDto;
 import com.example.blogsitebe.domain.auth.user.api.UserService;
+import com.example.blogsitebe.domain.platform.profile.api.ProfileDto;
+import com.example.blogsitebe.domain.platform.profile.api.ProfileService;
 import com.example.blogsitebe.domain.platform.profile.impl.ProfileServiceImpl;
 import com.example.blogsitebe.library.enums.MessageCodes;
 import com.example.blogsitebe.library.exception.CoreException;
@@ -20,7 +22,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository repository;
-    private final ProfileServiceImpl profileService;
+    private final ProfileService profileService;
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
@@ -32,8 +34,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public UserDto save(UserDto userDto) {
-        checkUserExist(userDto.getEmail());
-        var profile = profileService.save(userDto.getName(),userDto.getSurname(),userDto.getEmail(), userDto.getPhoneNumber());
+        var profile = profileService.save(userDto.getUserName(),userDto.getFullName(), userDto.getPhoneNumber());
         userDto.setProfileId(profile.getId());
         String password = StringUtils.hasLength(userDto.getPassword())
                 ? userDto.getPassword()
@@ -42,23 +43,14 @@ public class UserServiceImpl implements UserService {
         return UserMapper.toDto(repository.save(UserMapper.toEntity(userDto)));
     }
 
-    private void checkUserExist(String email) {
-     repository.findByEmail(email).ifPresent(user -> {
-                throw new CoreException(MessageCodes.ENTITY_ALREADY_EXISTS, User.class.getSimpleName(), email);
-            });
-    }
 
     private void persistUser(User user) {
-        var profile = profileService.save(user.getName(),user.getSurname(),user.getEmail(), user.getPhoneNumber());
+        var profile = profileService.save(user.getUserName(),user.getFullName(), user.getPhoneNumber());
         user.setProfileId(profile.getId());
     }
     private String formatPhoneNumber(String phoneNumber) {
         return "90" + phoneNumber;
 
-    }
-
-    public Optional<User> findByEmailAndRole(String email, Role role) {
-        return repository.findByEmailAndRole(email,role);
     }
 
     @Override
@@ -70,5 +62,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getMe() {
         return getById(JwtUtil.extractUserIdAndIfAnonymousThrow());
+    }
+
+    @Override
+    public ProfileDto getMeProfile() {
+        UserDto userDto = getById(JwtUtil.extractUserIdAndIfAnonymousThrow());
+        return profileService.getById(userDto.getProfileId());
+    }
+
+    public Optional<User> findByUserNameAndRole(String username, Role role) {
+        return repository.findByUserNameAndRole(username,role);
+
     }
 }

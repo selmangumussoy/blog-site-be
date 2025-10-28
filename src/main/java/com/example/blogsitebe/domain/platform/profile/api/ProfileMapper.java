@@ -16,9 +16,10 @@ public class ProfileMapper {
                 .gender(request.getGender())
                 .website(request.getWebsite())
                 .socialLinks(request.getSocialLinks())
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
                 .socialLinks(request.getSocialLinks())
+                .email(request.getEmail())
+                .name(request.getName())
+                .username(request.getUsername())
                 .build();
     }
 
@@ -27,8 +28,6 @@ public class ProfileMapper {
                 .id(dto.getId())
                 .created(dto.getCreated())
                 .modified(dto.getModified())
-                .firstName(dto.getFirstName())
-                .lastName(dto.getLastName())
                 .email(dto.getEmail())
                 .phone(dto.getPhone())
                 .picture(dto.getPicture())

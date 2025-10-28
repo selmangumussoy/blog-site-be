@@ -8,30 +8,30 @@ import com.example.blogsitebe.domain.auth.user.api.Role;
 
 public class AuthMapper {
     public static SignUpDto toDto(SignUpRequest signUpRequest, Role role) {
-        return new SignUpDto(
-                signUpRequest.password(),
-                signUpRequest.email(),
-                signUpRequest.name(),
-                signUpRequest.surname(),
-                signUpRequest.phoneNumber(),
-                role
-        );
+        return SignUpDto.builder()
+                .username(signUpRequest.getUsername())
+                .password(signUpRequest.getPassword())
+                .fullName(signUpRequest.getFullName())
+                .phoneNumber(signUpRequest.getPhoneNumber())
+                .rol(role)
+                .build();
     }
 
     public static LoginDto toDto(LoginRequest request, Role role) {
-        return new LoginDto(
-                request.username(),
-                request.password(),
-                role
+        return  LoginDto.builder()
+                .username(request.getUsername())
+                .password(request.getPassword())
+                .role(role)
+                .build(
         );
     }
 
     public static SignUpResponse toResponseSignUp(TokenDto tokenDto) {
-        return new SignUpResponse(tokenDto.token());
+        return SignUpResponse.builder().token(tokenDto.getToken()).build();
     }
 
     public static LoginResponse toResponseLoginDto(TokenDto tokenDto) {
-        return new LoginResponse(tokenDto.token());
+        return LoginResponse.builder().token(tokenDto.getToken()).build();
     }
 }
 
