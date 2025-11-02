@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: blog-site-be
+  datasource:
+    url: jdbc:mysql://localhost:3307/mydb
+    username: asim
+    password: asim123
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+jwt:
+  secret:
+    key: "BuCokGuvenliNebahatVeUzunBirSecretKeyYavuz0123456Asli"
+
+management:
+  admin:
+    password: 12345
