@@ -67,7 +67,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public ProfileDto getMeProfile() {
         UserDto userDto = getById(JwtUtil.extractUserIdAndIfAnonymousThrow());
-        return profileService.getById(userDto.getProfileId());
+        ProfileDto profileDto = profileService.getById(userDto.getProfileId());
+        return profileDto;
     }
 
     public Optional<User> findByUserNameAndRole(String username, Role role) {

@@ -36,6 +36,8 @@ public class ProfileMapper {
                 .gender(dto.getGender())
                 .website(dto.getWebsite())
                 .socialLinks(dto.getSocialLinks())
+                .name(dto.getName())
+                .username(dto.getUsername())
                 .build();
     }
 
