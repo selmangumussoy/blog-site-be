@@ -7,6 +7,6 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 public class BlogPostResponse extends AbstractResponse {
-    private String title;
+    private String blogContent;
     private String postId;
 }

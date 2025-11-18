@@ -13,7 +13,7 @@ import lombok.*;
 @Table(name = Post.TABLE)
 public class Post extends AbstractEntity {
 
-    public static final String TABLE = "posts";
+    public static final String TABLE = "post";
     public static final String COL_TYPE = "type";
     public static final String COL_PARENT_ID = "parent_id";
     public static final String COL_USER_ID = "user_id";

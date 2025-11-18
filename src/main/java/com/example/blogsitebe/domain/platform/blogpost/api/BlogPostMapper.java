@@ -15,7 +15,7 @@ public class BlogPostMapper implements
     @Override
     public BlogPost toEntity(BlogPostDto dto) {
         BlogPost e = new BlogPost();
-        e.setTitle(dto.getTitle());
+        e.setBlogContent( dto.getBlogContent() );
         e.setPostId(dto.getPostId());
         return e;
     }
@@ -26,7 +26,7 @@ public class BlogPostMapper implements
                 .id(e.getId())
                 .created(e.getCreated())
                 .modified(e.getModified())
-                .title(e.getTitle())
+                .blogContent(e.getBlogContent())
                 .postId(e.getPostId())
                 .build();
     }
@@ -34,8 +34,8 @@ public class BlogPostMapper implements
     @Override
     public BlogPostDto requestToDto(BlogPostRequest req) {
         return BlogPostDto.builder()
-                .title(req.title())
-                .postId(req.postId())
+                .blogContent(req.getBlogContent())
+                .postId(req.getPostId())
                 .build();
     }
 
@@ -45,7 +45,7 @@ public class BlogPostMapper implements
                 .id(dto.getId())
                 .created(dto.getCreated())
                 .modified(dto.getModified())
-                .title(dto.getTitle())
+                .blogContent(dto.getBlogContent())
                 .postId(dto.getPostId())
                 .build();
     }

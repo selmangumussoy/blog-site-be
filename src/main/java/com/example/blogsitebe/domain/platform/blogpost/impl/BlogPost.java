@@ -14,13 +14,13 @@ import lombok.*;
 @Table(name = BlogPost.TABLE)
 public class BlogPost extends AbstractEntity {
     public static final String TABLE = "blog_post";
-    public static final String COL_TITLE = "title";
+    public static final String COL_BLOG_CONTENT = "blog_content";
     public static final String COL_POST_ID = "post_id";
 
-    @Column(name = COL_TITLE, nullable = false)
-    private String title;
+    @Column(name = COL_BLOG_CONTENT, columnDefinition = "TEXT", nullable = false)
+    private String blogContent;
 
     @Column(name = COL_POST_ID, nullable = false)
-    private String postId; // Post.id (ID ile ilişki)
+    private String postId;
 
 }

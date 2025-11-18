@@ -21,7 +21,7 @@ public class BlogPostServiceImpl extends AbstractServiceImpl<BlogPost, BlogPostD
 
     @Override
     protected void updateEntityFields(BlogPost e, BlogPostDto d) {
-        e.setTitle(d.getTitle());
+        e.setBlogContent(d.getBlogContent());
         e.setPostId(d.getPostId());
     }
 }

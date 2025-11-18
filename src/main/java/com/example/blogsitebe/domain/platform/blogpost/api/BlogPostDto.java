@@ -7,6 +7,6 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 public class BlogPostDto extends AbstractDto {
-    private String title;
+    private String blogContent;
     private String postId;
 }
