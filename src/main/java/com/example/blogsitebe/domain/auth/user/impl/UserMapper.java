@@ -13,7 +13,7 @@ public class UserMapper {
         user.setPhoneNumber(dto.getPhoneNumber());
         return user;
     }
-    public static User toEntity(UserDto dto) {
+    public static User toEntityForUser(UserDto dto) {
         User user = new User();
         user.setUserName(dto.getUserName());
         user.setFullName(dto.getFullName());
@@ -32,6 +32,9 @@ public class UserMapper {
                 .phoneNumber(user.getPhoneNumber())
                 .role(user.getRole())
                 .profileId(user.getProfileId())
+                .created(user.getCreated())
+                .modified(user.getModified())
+                .id(user.getId())
                 .build();
     }
 }

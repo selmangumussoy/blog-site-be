@@ -10,6 +10,9 @@ public class UserMapper {
                 .userName(userDto.getUserName())
                 .phoneNumber(userDto.getPhoneNumber())
                 .fullName(userDto.getFullName())
+                .id(userDto.getId())
+                .created(userDto.getCreated())
+                .modified(userDto.getModified())
                 .build();
     }
 }

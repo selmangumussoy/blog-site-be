@@ -48,8 +48,11 @@ public class SecurityConfig{
                 .headers(x -> x.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(x -> x.requestMatchers(mvc.pattern("/auth/**")).permitAll())
-                .authorizeHttpRequests(x -> x.anyRequest().permitAll())
+                .authorizeHttpRequests(x -> x
+                        .requestMatchers(mvc.pattern("/auth/**")).permitAll()
+                        .requestMatchers(mvc.pattern("/ws/**")).permitAll()
+                        .anyRequest().permitAll()
+                )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
@@ -79,13 +82,13 @@ public class SecurityConfig{
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+        configuration.setAllowedOriginPatterns(Arrays.asList("http://localhost:3000"));//        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("hostLocation", "Content-Type", "Authorization"   ));
+        configuration.setAllowedHeaders(Arrays.asList("*"));//        configuration.setAllowedHeaders(Arrays.asList("hostLocation", "Content-Type", "Authorization"   ));
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);  // Tüm istekler için CORS yapılandırması
+        source.registerCorsConfiguration("/**", configuration);
         return source;
     }
 }

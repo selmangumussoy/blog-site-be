@@ -1,12 +1,11 @@
 package com.example.blogsitebe.library.abstraction;
 
 
-import com.example.blogsitebe.library.rest.BaseController;
-import com.example.blogsitebe.library.rest.DataResponse;
-import com.example.blogsitebe.library.rest.MetaResponse;
-import com.example.blogsitebe.library.rest.Response;
+import com.example.blogsitebe.library.rest.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +22,13 @@ public abstract class AbstractController<D, Req, Res> extends BaseController {
                 .map(mapper::toResponse)
                 .toList();
         return respond(responseList);
+    }
+
+    @GetMapping("/page")
+    public Response<PageResponse<Res>> getAllList(Pageable pageable) {
+        Page<Res> page = service.getAllList(pageable)
+                .map(mapper::toResponse);
+        return respond(page);
     }
 
     @GetMapping("/{id}")

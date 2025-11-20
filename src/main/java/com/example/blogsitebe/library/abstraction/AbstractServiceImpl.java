@@ -4,6 +4,8 @@ import com.example.blogsitebe.library.enums.MessageCodes;
 import com.example.blogsitebe.library.exception.CoreException;
 import com.example.blogsitebe.library.rest.AbstractEntity;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -17,6 +19,12 @@ public abstract class AbstractServiceImpl<T extends AbstractEntity, D>
     @Override
     public List<D> getAll() {
         return repository.findAll().stream().map(mapper::entityToDto).toList();
+    }
+
+    @Override
+    public Page<D> getAllList(Pageable pageable) {
+        return repository.findAll(pageable)
+                .map(mapper::entityToDto);
     }
 
     @Override

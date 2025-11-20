@@ -5,12 +5,15 @@ import com.example.blogsitebe.domain.auth.user.api.UserService;
 import com.example.blogsitebe.domain.platform.profile.api.ProfileMapper;
 import com.example.blogsitebe.domain.platform.profile.web.ProfileResponse;
 import com.example.blogsitebe.library.rest.BaseController;
+import com.example.blogsitebe.library.rest.DataResponse;
 import com.example.blogsitebe.library.rest.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -32,4 +35,14 @@ public class UserController extends BaseController {
     public Response<ProfileResponse> getMeProfile() {
         return respond(ProfileMapper.toResponse(service.getMeProfile()));
     }
+
+
+    @GetMapping
+    public Response<DataResponse<UserResponse>> getAll() {
+        List<UserResponse> responseList = service.getAll().stream()
+                .map(UserMapper::toResponse)
+                .toList();
+        return respond(responseList);
+    }
+
 }

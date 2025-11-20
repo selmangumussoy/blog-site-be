@@ -5,9 +5,6 @@ import com.example.blogsitebe.domain.auth.user.api.UserDto;
 import com.example.blogsitebe.domain.auth.user.api.UserService;
 import com.example.blogsitebe.domain.platform.profile.api.ProfileDto;
 import com.example.blogsitebe.domain.platform.profile.api.ProfileService;
-import com.example.blogsitebe.domain.platform.profile.impl.ProfileServiceImpl;
-import com.example.blogsitebe.library.enums.MessageCodes;
-import com.example.blogsitebe.library.exception.CoreException;
 import com.example.blogsitebe.library.security.JwtUtil;
 import com.example.blogsitebe.library.utils.Functions;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -40,7 +38,7 @@ public class UserServiceImpl implements UserService {
                 ? userDto.getPassword()
                 : Functions.generateRandomPassword();
         userDto.setPassword(passwordEncoder.encode(password));
-        return UserMapper.toDto(repository.save(UserMapper.toEntity(userDto)));
+        return UserMapper.toDto(repository.save(UserMapper.toEntityForUser(userDto)));
     }
 
 
@@ -75,4 +73,14 @@ public class UserServiceImpl implements UserService {
         return repository.findByUserNameAndRole(username,role);
 
     }
+
+    @Override
+    public List<UserDto> getAll() {
+        return repository.findAll()
+                .stream()
+                .map(UserMapper::toDto)
+                .toList();
+    }
+
+
 }
