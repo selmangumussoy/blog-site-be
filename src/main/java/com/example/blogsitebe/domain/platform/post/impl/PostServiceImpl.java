@@ -6,6 +6,8 @@ import com.example.blogsitebe.domain.platform.post.api.PostService;
 import com.example.blogsitebe.library.abstraction.AbstractServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PostServiceImpl extends AbstractServiceImpl<Post, PostDto> implements PostService {
 
@@ -27,5 +29,12 @@ public class PostServiceImpl extends AbstractServiceImpl<Post, PostDto> implemen
         entity.setTagId(dto.getTagId());
         entity.setLikeCount(dto.getLikeCount());
         entity.setCommentCount(dto.getCommentCount());
+    }
+    @Override
+    public List<PostDto> getAllByUserId(String userId) {
+        return ((PostRepository) repository).findAllByUserIdOrderByCreatedDesc(userId)
+                .stream()
+                .map(mapper::entityToDto)
+                .toList();
     }
 }

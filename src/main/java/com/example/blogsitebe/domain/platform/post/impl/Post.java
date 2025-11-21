@@ -21,11 +21,15 @@ public class Post extends AbstractEntity {
     public static final String COL_TAG_ID = "tag_id";
     public static final String COL_LIKE_COUNT = "like_count";
     public static final String COL_COMMENT_COUNT = "comment_count";
+    public static final String COL_TITLE = "title";
 
     // Enum tipi
     @Enumerated(EnumType.STRING)
     @Column(name = COL_TYPE, nullable = false)
     private PostType type;
+
+    @Column(name = COL_TITLE, nullable = true)
+    private String title;
 
     // Orijinal post ilişkisi (örneğin Repost)
     @Column(name = COL_PARENT_ID)
