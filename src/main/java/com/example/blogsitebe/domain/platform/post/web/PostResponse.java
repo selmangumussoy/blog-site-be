@@ -15,4 +15,6 @@ public class PostResponse extends AbstractResponse {
     private String tagId;
     private Integer likeCount;
     private Integer commentCount;
+    private String username;
+    private String fullName;
 }
