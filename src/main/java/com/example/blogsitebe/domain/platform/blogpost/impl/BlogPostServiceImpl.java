@@ -24,4 +24,10 @@ public class BlogPostServiceImpl extends AbstractServiceImpl<BlogPost, BlogPostD
         e.setBlogContent(d.getBlogContent());
         e.setPostId(d.getPostId());
     }
+    @Override
+    public BlogPostDto getByPostId(String postId) {
+        return ((BlogPostRepository) repository).findByPostId(postId)
+                .map(mapper::entityToDto)
+                .orElse(null);
+    }
 }
