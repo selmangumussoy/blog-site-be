@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class QuotePostServiceImpl extends AbstractServiceImpl<QuotePost, QuotePostDto> implements QuotePostService {
+
+    QuotePostRepository repository;
     public QuotePostServiceImpl(QuotePostRepository repository, QuotePostMapper mapper) {
         super(repository, mapper);
     }
@@ -27,5 +29,13 @@ public class QuotePostServiceImpl extends AbstractServiceImpl<QuotePost, QuotePo
         entity.setTotalPages(dto.getTotalPages());
         entity.setThought(dto.getThought());
     }
+
+    @Override
+    public QuotePostDto getByPostId(String postId) {
+        return repository.findByPostId(postId)
+                .map(mapper::entityToDto)
+                .orElse(null);
+    }
+
 
 }
