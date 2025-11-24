@@ -17,6 +17,7 @@ public class BlogPost extends AbstractEntity {
     public static final String COL_BLOG_CONTENT = "blog_content";
     public static final String COL_POST_ID = "post_id";
     public static final String COL_COVER_IMAGE = "cover_image";
+    public static final String COL_TITLE = "title";
 
     @Column(name = COL_BLOG_CONTENT, columnDefinition = "TEXT", nullable = false)
     private String blogContent;
@@ -26,5 +27,8 @@ public class BlogPost extends AbstractEntity {
 
     @Column(name = COL_COVER_IMAGE)
     private String coverImage;
+
+    @Column(name = COL_TITLE)
+    private String title;
 
 }
