@@ -24,7 +24,7 @@ public class BlogPostController extends AbstractController<BlogPostDto, BlogPost
     public Response<BlogPostResponse> getBlogPostByPostId(@PathVariable String postId) {
         BlogPostDto dto = service.getByPostId(postId);
         if (dto == null) {
-            return respond(BlogPostResponse.builder().build()); // Boş dönebiliriz veya hata fırlatabiliriz
+            return respond(BlogPostResponse.builder().build());
         }
         return respond(mapper.toResponse(dto));
     }

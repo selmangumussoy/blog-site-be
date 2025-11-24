@@ -17,4 +17,5 @@ public class PostResponse extends AbstractResponse {
     private Integer commentCount;
     private String username;
     private String fullName;
+    private String title;
 }
