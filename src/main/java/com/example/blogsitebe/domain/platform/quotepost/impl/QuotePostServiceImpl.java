@@ -1,5 +1,6 @@
 package com.example.blogsitebe.domain.platform.quotepost.impl;
 
+import com.example.blogsitebe.domain.platform.post.impl.PostRepository;
 import com.example.blogsitebe.domain.platform.quotepost.api.QuotePostDto;
 import com.example.blogsitebe.domain.platform.quotepost.api.QuotePostMapper;
 import com.example.blogsitebe.domain.platform.quotepost.api.QuotePostService;
@@ -9,9 +10,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class QuotePostServiceImpl extends AbstractServiceImpl<QuotePost, QuotePostDto> implements QuotePostService {
 
-    QuotePostRepository repository;
-    public QuotePostServiceImpl(QuotePostRepository repository, QuotePostMapper mapper) {
+    private final QuotePostRepository quotePostRepository;
+
+    public QuotePostServiceImpl(QuotePostRepository repository, QuotePostMapper mapper, PostRepository postRepository) {
         super(repository, mapper);
+        this.quotePostRepository = repository;
     }
 
     @Override
@@ -32,7 +35,7 @@ public class QuotePostServiceImpl extends AbstractServiceImpl<QuotePost, QuotePo
 
     @Override
     public QuotePostDto getByPostId(String postId) {
-        return repository.findByPostId(postId)
+        return quotePostRepository.findByPostId(postId)
                 .map(mapper::entityToDto)
                 .orElse(null);
     }
