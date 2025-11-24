@@ -17,6 +17,7 @@ public class QuotePostController  extends AbstractController<QuotePostDto, Quote
     QuotePostService service;
     public QuotePostController(QuotePostService service, QuotePostMapper mapper) {
         super(service, mapper);
+        this.service = service;
     }
 
 

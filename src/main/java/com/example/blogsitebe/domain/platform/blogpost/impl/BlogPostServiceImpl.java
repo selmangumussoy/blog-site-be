@@ -1,7 +1,9 @@
 package com.example.blogsitebe.domain.platform.blogpost.impl;
 
 import com.example.blogsitebe.domain.platform.blogpost.api.BlogPostDto;
+import com.example.blogsitebe.domain.platform.blogpost.api.BlogPostMapper;
 import com.example.blogsitebe.domain.platform.blogpost.api.BlogPostService;
+import com.example.blogsitebe.domain.platform.quotepost.impl.QuotePostRepository;
 import com.example.blogsitebe.library.abstraction.AbstractEntityMapper;
 import com.example.blogsitebe.library.abstraction.AbstractRepository;
 import com.example.blogsitebe.library.abstraction.AbstractServiceImpl;
@@ -9,9 +11,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BlogPostServiceImpl extends AbstractServiceImpl<BlogPost, BlogPostDto> implements BlogPostService {
-    public BlogPostServiceImpl(AbstractRepository<BlogPost> repository,
-                               AbstractEntityMapper<BlogPost, BlogPostDto> mapper) {
+
+    private final BlogPostRepository repository;
+
+    public BlogPostServiceImpl(BlogPostRepository repository, BlogPostMapper mapper) {
         super(repository, mapper);
+        this.repository = repository;
     }
 
     @Override
@@ -26,7 +31,7 @@ public class BlogPostServiceImpl extends AbstractServiceImpl<BlogPost, BlogPostD
     }
     @Override
     public BlogPostDto getByPostId(String postId) {
-        return ((BlogPostRepository) repository).findByPostId(postId)
+        return repository.findByPostId(postId)
                 .map(mapper::entityToDto)
                 .orElse(null);
     }
