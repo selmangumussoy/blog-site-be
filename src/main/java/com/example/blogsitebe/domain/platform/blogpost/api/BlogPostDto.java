@@ -9,4 +9,5 @@ import lombok.experimental.SuperBuilder;
 public class BlogPostDto extends AbstractDto {
     private String blogContent;
     private String postId;
+    private String title;
 }

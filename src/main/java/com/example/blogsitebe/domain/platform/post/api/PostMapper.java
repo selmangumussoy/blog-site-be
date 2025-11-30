@@ -29,6 +29,7 @@ public class PostMapper implements
         e.setTagId(dto.getTagId());
         e.setLikeCount(dto.getLikeCount());
         e.setCommentCount(dto.getCommentCount());
+        e.setTitle(dto.getTitle());
         return e;
     }
 
@@ -45,6 +46,7 @@ public class PostMapper implements
                 .tagId(entity.getTagId())
                 .likeCount(entity.getLikeCount())
                 .commentCount(entity.getCommentCount())
+                .title(entity.getTitle())
                 .build();
     }
 
@@ -58,6 +60,7 @@ public class PostMapper implements
                 .tagId(req.getTagId())
                 .likeCount(req.getLikeCount())
                 .commentCount(req.getCommentCount())
+                .title(req.getTitle())
                 .build();
     }
 
@@ -88,6 +91,7 @@ public class PostMapper implements
                 .tagId(dto.getTagId())
                 .likeCount(dto.getLikeCount())
                 .commentCount(dto.getCommentCount())
+                .title(dto.getTitle())
                 .username(username)
                 .fullName(fullName)
                 .build();

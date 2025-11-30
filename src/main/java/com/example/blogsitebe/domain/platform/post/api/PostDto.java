@@ -14,4 +14,5 @@ public class PostDto extends AbstractDto {
     private String tagId;
     private Integer likeCount;
     private Integer commentCount;
+    private String title;
 }

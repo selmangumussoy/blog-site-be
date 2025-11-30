@@ -17,6 +17,7 @@ public class BlogPostMapper implements
         BlogPost e = new BlogPost();
         e.setBlogContent( dto.getBlogContent() );
         e.setPostId(dto.getPostId());
+        e.setTitle( dto.getTitle() );
         return e;
     }
 
@@ -28,6 +29,7 @@ public class BlogPostMapper implements
                 .modified(e.getModified())
                 .blogContent(e.getBlogContent())
                 .postId(e.getPostId())
+                .title(e.getTitle())
                 .build();
     }
 
@@ -36,6 +38,7 @@ public class BlogPostMapper implements
         return BlogPostDto.builder()
                 .blogContent(req.getBlogContent())
                 .postId(req.getPostId())
+                .title(req.getTitle())
                 .build();
     }
 
@@ -47,6 +50,7 @@ public class BlogPostMapper implements
                 .modified(dto.getModified())
                 .blogContent(dto.getBlogContent())
                 .postId(dto.getPostId())
+                .title(dto.getTitle())
                 .build();
     }
 }

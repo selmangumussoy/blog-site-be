@@ -12,5 +12,6 @@ import lombok.NoArgsConstructor;
 public class BlogPostRequest {
     private String blogContent;
     private String postId;
+    private String title;
 }
 

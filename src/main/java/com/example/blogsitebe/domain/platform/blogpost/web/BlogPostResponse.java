@@ -9,4 +9,5 @@ import lombok.experimental.SuperBuilder;
 public class BlogPostResponse extends AbstractResponse {
     private String blogContent;
     private String postId;
+    private String title;
 }

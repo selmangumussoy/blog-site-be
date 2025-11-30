@@ -11,16 +11,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/blog-posts")
+@RequestMapping("/api/blog-posts")
 public class BlogPostController extends AbstractController<BlogPostDto, BlogPostRequest, BlogPostResponse> {
+
+    private final BlogPostService service;
+
     public BlogPostController(BlogPostService service, BlogPostMapper mapper) {
         super(service, mapper);
+        this.service = service;
     }
     @GetMapping("/by-post/{postId}")
     public Response<BlogPostResponse> getBlogPostByPostId(@PathVariable String postId) {
-        BlogPostDto dto = ((BlogPostService) service).getByPostId(postId);
+        BlogPostDto dto = service.getByPostId(postId);
         if (dto == null) {
-            return respond(BlogPostResponse.builder().build()); // Boş dönebiliriz veya hata fırlatabiliriz
+            return respond(BlogPostResponse.builder().build());
         }
         return respond(mapper.toResponse(dto));
     }

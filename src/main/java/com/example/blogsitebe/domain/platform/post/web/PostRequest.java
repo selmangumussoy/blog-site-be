@@ -18,4 +18,5 @@ public class PostRequest {
     private String tagId;
     private Integer likeCount;
     private Integer commentCount;
+    private String title;
 }

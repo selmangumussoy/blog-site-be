@@ -22,13 +22,12 @@ public class PostServiceImpl extends AbstractServiceImpl<Post, PostDto> implemen
 
     @Override
     protected void updateEntityFields(Post entity, PostDto dto) {
-        entity.setType(dto.getType());
         entity.setParentId(dto.getParentId());
-        entity.setUserId(dto.getUserId());
         entity.setContent(dto.getContent());
         entity.setTagId(dto.getTagId());
         entity.setLikeCount(dto.getLikeCount());
         entity.setCommentCount(dto.getCommentCount());
+        entity.setTitle(dto.getTitle());
     }
     @Override
     public List<PostDto> getAllByUserId(String userId) {
