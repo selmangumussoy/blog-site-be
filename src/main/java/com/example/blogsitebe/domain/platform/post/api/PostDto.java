@@ -4,6 +4,8 @@ import com.example.blogsitebe.library.abstraction.AbstractDto;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 
+import java.util.List;
+
 @Data
 @SuperBuilder
 public class PostDto extends AbstractDto {
@@ -11,8 +13,8 @@ public class PostDto extends AbstractDto {
     private String parentId;
     private String userId;
     private String content;
-    private String tagId;
     private Integer likeCount;
     private Integer commentCount;
     private String title;
+    private List<String> tags;
 }

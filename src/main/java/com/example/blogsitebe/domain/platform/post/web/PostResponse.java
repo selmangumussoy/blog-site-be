@@ -5,6 +5,8 @@ import com.example.blogsitebe.library.abstraction.AbstractResponse;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 
+import java.util.List;
+
 @Data
 @SuperBuilder
 public class PostResponse extends AbstractResponse {
@@ -12,10 +14,10 @@ public class PostResponse extends AbstractResponse {
     private String parentId;
     private String userId;
     private String content;
-    private String tagId;
     private Integer likeCount;
     private Integer commentCount;
     private String username;
     private String fullName;
     private String title;
+    private List<String> tags;
 }

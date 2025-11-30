@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -15,8 +17,8 @@ public class PostRequest {
     private String parentId;
     private String userId;
     private String content;
-    private String tagId;
     private Integer likeCount;
     private Integer commentCount;
     private String title;
+    private List<String> tagIds;
 }
