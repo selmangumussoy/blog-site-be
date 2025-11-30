@@ -1,16 +1,16 @@
 package com.example.blogsitebe.domain.platform.like.impl;
 
 import com.example.blogsitebe.library.rest.AbstractEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
-@Table(name = Like.TABLE)
+@Table(
+        name = Like.TABLE,
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {Like.COL_USER_ID, Like.COL_POST_ID}) // AYNI KİŞİ AYNI POSTU 1 KEZ BEĞENEBİLİR
+        }
+)
 @Getter
 @Setter
 @NoArgsConstructor

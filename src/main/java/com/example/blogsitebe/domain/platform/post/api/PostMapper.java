@@ -2,6 +2,8 @@ package com.example.blogsitebe.domain.platform.post.api;
 
 import com.example.blogsitebe.domain.auth.user.api.UserDto;
 import com.example.blogsitebe.domain.auth.user.api.UserService;
+import com.example.blogsitebe.domain.platform.like.impl.Like;
+import com.example.blogsitebe.domain.platform.like.impl.LikeRepository; // IMPORT EKLENDİ
 import com.example.blogsitebe.domain.platform.post.impl.Post;
 import com.example.blogsitebe.domain.platform.posttag.impl.PostTag;
 import com.example.blogsitebe.domain.platform.posttag.impl.PostTagRepository;
@@ -14,6 +16,7 @@ import com.example.blogsitebe.library.abstraction.AbstractWebMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,6 +29,7 @@ public class PostMapper implements
     private final UserService userService;
     private final PostTagRepository postTagRepository;
     private final TagRepository tagRepository;
+    private final LikeRepository likeRepository;
 
     @Override
     public Post toEntity(PostDto dto) {
@@ -43,14 +47,18 @@ public class PostMapper implements
     @Override
     public PostDto entityToDto(Post entity) {
 
-        // 1) PostTag üzerinden ilişkileri çek
         List<PostTag> relations = postTagRepository.findAllByPostId(entity.getId());
-
-        // 2) Tag isimlerini oku
         List<String> tagNames = relations.stream()
                 .map(rel -> tagRepository.findById(rel.getTagId()).orElse(null))
                 .filter(Objects::nonNull)
                 .map(Tag::getName)
+                .toList();
+
+
+        List<Like> postLikes = likeRepository.findAllByPostId(entity.getId());
+
+        List<String> likedUserIds = postLikes.stream()
+                .map(Like::getUserId)
                 .toList();
 
         return PostDto.builder()
@@ -65,6 +73,7 @@ public class PostMapper implements
                 .commentCount(entity.getCommentCount())
                 .title(entity.getTitle())
                 .tags(tagNames)
+                .likes(likedUserIds)
                 .build();
     }
 
@@ -78,7 +87,7 @@ public class PostMapper implements
                 .likeCount(req.getLikeCount())
                 .commentCount(req.getCommentCount())
                 .title(req.getTitle())
-                .tags(req.getTagIds()) // 👈 Artık sadece tagIds kullanıyoruz
+                .tags(req.getTagIds())
                 .build();
     }
 
@@ -96,6 +105,8 @@ public class PostMapper implements
             }
         } catch (Exception ignored) {}
 
+        List<String> safeLikes = dto.getLikes() != null ? dto.getLikes() : Collections.emptyList();
+
         return PostResponse.builder()
                 .id(dto.getId())
                 .created(dto.getCreated())
@@ -110,6 +121,7 @@ public class PostMapper implements
                 .username(username)
                 .fullName(fullName)
                 .tags(dto.getTags())
+                .likes(safeLikes)
                 .build();
     }
 }

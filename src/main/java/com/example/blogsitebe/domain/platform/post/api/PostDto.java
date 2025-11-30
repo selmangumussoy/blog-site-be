@@ -17,4 +17,5 @@ public class PostDto extends AbstractDto {
     private Integer commentCount;
     private String title;
     private List<String> tags;
+    private List<String> likes;
 }

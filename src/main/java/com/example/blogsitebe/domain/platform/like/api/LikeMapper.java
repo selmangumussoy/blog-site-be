@@ -1,6 +1,5 @@
 package com.example.blogsitebe.domain.platform.like.api;
 
-
 import com.example.blogsitebe.domain.platform.like.impl.Like;
 import com.example.blogsitebe.domain.platform.like.web.LikeRequest;
 import com.example.blogsitebe.domain.platform.like.web.LikeResponse;
@@ -16,20 +15,18 @@ public class LikeMapper implements AbstractEntityMapper<Like, LikeDto>, Abstract
         like.setId(dto.getId());
         like.setUserId(dto.getUserId());
         like.setPostId(dto.getPostId());
-        like.setCreated(dto.getCreated());
-        like.setModified(dto.getModified());
         return like;
     }
 
     @Override
     public LikeDto entityToDto(Like entity) {
-       return LikeDto.builder()
-               .postId(entity.getPostId())
-               .userId(entity.getPostId())
-               .created(entity.getCreated())
-               .modified(entity.getModified())
-               .id(entity.getId())
-               .build();
+        return LikeDto.builder()
+                .id(entity.getId())
+                .postId(entity.getPostId())
+                .userId(entity.getUserId()) // DÜZELTİLDİ: Eskiden getPostId() idi.
+                .created(entity.getCreated())
+                .modified(entity.getModified())
+                .build();
     }
 
     @Override
@@ -38,7 +35,6 @@ public class LikeMapper implements AbstractEntityMapper<Like, LikeDto>, Abstract
                 .userId(request.getUserId())
                 .postId(request.getPostId())
                 .build();
-
     }
 
     @Override
@@ -47,8 +43,6 @@ public class LikeMapper implements AbstractEntityMapper<Like, LikeDto>, Abstract
                 .id(dto.getId())
                 .userId(dto.getUserId())
                 .postId(dto.getPostId())
-                .created(dto.getCreated())
-                .modified(dto.getModified())
                 .build();
     }
 }

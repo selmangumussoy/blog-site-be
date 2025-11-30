@@ -20,4 +20,5 @@ public class PostResponse extends AbstractResponse {
     private String fullName;
     private String title;
     private List<String> tags;
+    private List<String> likes;
 }
