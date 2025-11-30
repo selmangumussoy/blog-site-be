@@ -9,6 +9,9 @@ import com.example.blogsitebe.library.exception.CoreException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Transactional
 public class SavedPostServiceImpl extends AbstractServiceImpl<SavedPost, SavedPostDto> implements SavedPostService {
@@ -42,6 +45,22 @@ public class SavedPostServiceImpl extends AbstractServiceImpl<SavedPost, SavedPo
         }
         SavedPost entity = mapper.toEntity(dto);
         return mapper.entityToDto(savedPostRepository.save(entity));
+    }
+
+    @Override
+    public void delete(String id) {
+        SavedPost entity = savedPostRepository.findById(id)
+                .orElseThrow(() -> new CoreException(MessageCodes.ENTITY_NOT_FOUND, getEntityName(), id));
+
+        savedPostRepository.delete(entity);
+    }
+
+    @Override
+    public List<SavedPostDto> getListByUserId(String userId) {
+        return savedPostRepository.findAllByUserId(userId)
+                .stream()
+                .map(mapper::entityToDto)
+                .collect(Collectors.toList());
     }
 
 }

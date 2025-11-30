@@ -7,7 +7,7 @@ public enum MessageCodes {
     SUCCESS("200", "general.success"),
     FAIL("500", "general.fail"),
     ENTITY_ALREADY_EXISTS("409", "general.entityAlreadyExists"),
-    TOKEN_EXPIRED("1025", "general.tokenExpired");
+    TOKEN_EXPIRED("1025", "general.tokenExpired"), ENTITY_NOT_FOUND("404","" );
 
 
     private final String code;

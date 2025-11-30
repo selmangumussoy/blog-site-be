@@ -9,6 +9,6 @@ import lombok.experimental.SuperBuilder;
 public class SavedPostDto extends AbstractDto {
     private String postId;
     private String userId;
-    private String content;
+
 
 }
