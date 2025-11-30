@@ -1,7 +1,6 @@
 package com.example.blogsitebe.domain.platform.userstats.impl;
 
 
-import com.example.blogsitebe.domain.platform.tag.impl.Tag;
 import com.example.blogsitebe.library.rest.AbstractEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,7 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = Tag.TABLE)
+@Table(name = UserStats.TABLE)
 public class UserStats extends AbstractEntity {
     public static final String TABLE = "user_stats";
 
@@ -29,12 +28,12 @@ public class UserStats extends AbstractEntity {
     private String userId;
 
     @Column(name = COL_FOLLOWERS_COUNT)
-    private Integer followerCount;
+    private Integer followerCount = 0;
 
     @Column(name = COL_FOLLOWED_COUNT)
-    private Integer followedCount;
+    private Integer followedCount = 0 ;
 
     @Column(name = COL_POST_COUNT)
-    private Integer postCount;
+    private Integer postCount = 0;
 
 }

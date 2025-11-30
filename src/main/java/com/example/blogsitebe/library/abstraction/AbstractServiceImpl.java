@@ -52,8 +52,10 @@ public abstract class AbstractServiceImpl<T extends AbstractEntity, D>
 
     @Override
     public void delete(String id) {
-        repository.findById(id)
-                .orElseThrow(() -> new CoreException(MessageCodes.ENTITY_ALREADY_EXISTS, getEntityName(), id));
+        T entity = repository.findById(id)
+                .orElseThrow(() -> new CoreException(MessageCodes.ENTITY_NOT_FOUND, getEntityName(), id));
+
+        repository.delete(entity);
     }
 
     protected abstract String getEntityName();

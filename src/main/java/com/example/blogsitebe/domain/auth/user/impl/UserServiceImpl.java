@@ -5,6 +5,7 @@ import com.example.blogsitebe.domain.auth.user.api.UserDto;
 import com.example.blogsitebe.domain.auth.user.api.UserService;
 import com.example.blogsitebe.domain.platform.profile.api.ProfileDto;
 import com.example.blogsitebe.domain.platform.profile.api.ProfileService;
+import com.example.blogsitebe.domain.platform.userstats.api.UserStatsService;
 import com.example.blogsitebe.library.security.JwtUtil;
 import com.example.blogsitebe.library.utils.Functions;
 import lombok.RequiredArgsConstructor;
@@ -24,13 +25,17 @@ public class UserServiceImpl implements UserService {
     private final UserRepository repository;
     private final ProfileService profileService;
     private final PasswordEncoder passwordEncoder;
+    private final UserStatsService userStatsService;
 
     @Transactional
     public User save(User user) {
         persistUser(user);
         user.setPhoneNumber(formatPhoneNumber(user.getPhoneNumber()));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return repository.save(user);
+        User saved = repository.save(user);
+
+        userStatsService.createInitialStats(saved.getId());
+        return saved;
     }
 
     public UserDto save(UserDto userDto) {

@@ -3,6 +3,7 @@ package com.example.blogsitebe.domain.platform.follow.impl;
 import com.example.blogsitebe.domain.platform.follow.api.FollowDto;
 import com.example.blogsitebe.domain.platform.follow.api.FollowMapper;
 import com.example.blogsitebe.domain.platform.follow.api.FollowService;
+import com.example.blogsitebe.domain.platform.userstats.impl.UserStatsServiceImpl;
 import com.example.blogsitebe.library.abstraction.AbstractServiceImpl;
 import com.example.blogsitebe.library.enums.MessageCodes;
 import com.example.blogsitebe.library.exception.CoreException;
@@ -14,11 +15,13 @@ import org.springframework.stereotype.Service;
 public class FollowServiceImpl extends AbstractServiceImpl<Follow, FollowDto> implements FollowService {
     private final FollowRepository followRepository;
     private final FollowMapper mapper;
+    private final UserStatsServiceImpl userStatsServiceImpl;
 
-    public FollowServiceImpl(FollowRepository repository, FollowMapper mapper) {
+    public FollowServiceImpl(FollowRepository repository, FollowMapper mapper, UserStatsServiceImpl userStatsServiceImpl) {
         super(repository, mapper);
         this.followRepository = repository;
         this.mapper = mapper;
+        this.userStatsServiceImpl = userStatsServiceImpl;
     }
 
     @Override
@@ -42,6 +45,17 @@ public class FollowServiceImpl extends AbstractServiceImpl<Follow, FollowDto> im
                     "followerId=" + d.getFollowerId() + ", followingId=" + d.getFollowedId()
             );
         }
+        userStatsServiceImpl.increaseFollow(d.getFollowedId(),d.getFollowerId());
         return mapper.entityToDto(followRepository.save(mapper.toEntity(d)));
     }
+
+    @Override
+    public void delete(String id) {
+        Follow entity = repository.findById(id)
+                .orElseThrow(() -> new CoreException(MessageCodes.ENTITY_NOT_FOUND, getEntityName(), id));
+
+        userStatsServiceImpl.decreaseFollow(entity.getFollowedId(),entity.getFollowerId());
+        repository.delete(entity);
+    }
+
 }
