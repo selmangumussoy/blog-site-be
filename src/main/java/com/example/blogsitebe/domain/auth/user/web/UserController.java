@@ -6,12 +6,12 @@ import com.example.blogsitebe.domain.platform.profile.api.ProfileMapper;
 import com.example.blogsitebe.domain.platform.profile.web.ProfileResponse;
 import com.example.blogsitebe.library.rest.BaseController;
 import com.example.blogsitebe.library.rest.DataResponse;
+import com.example.blogsitebe.library.rest.PageResponse;
 import com.example.blogsitebe.library.rest.Response;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -44,5 +44,23 @@ public class UserController extends BaseController {
                 .toList();
         return respond(responseList);
     }
+
+
+    @GetMapping("/search")
+    public Response<PageResponse<UserResponse>> searchUsers(
+            String q,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+
+        var result = service.searchByUsername(q, pageable)
+                .map(UserMapper::toResponse);
+
+        return respond(result);
+    }
+
+
+
 
 }

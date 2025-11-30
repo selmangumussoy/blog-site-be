@@ -4,5 +4,5 @@ import com.example.blogsitebe.library.abstraction.AbstractRepository;
 
 public interface FollowRepository extends AbstractRepository<Follow> {
 
-    boolean existsByFollowerIdAndFollowingId(String followerId, String followingId);
+    boolean existsByFollowerIdAndFollowedId(String followerId, String followingId);
 }

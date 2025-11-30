@@ -8,5 +8,5 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class FollowDto extends AbstractDto {
     private String followerId;
-    private String followingId;
+    private String followedId;
 }

@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class FollowRequest {
     private String followerId;
-    private String followingId;
+    private String followedId;
 }

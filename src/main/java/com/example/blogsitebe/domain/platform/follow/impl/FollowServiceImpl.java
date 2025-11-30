@@ -27,19 +27,19 @@ public class FollowServiceImpl extends AbstractServiceImpl<Follow, FollowDto> im
     @Override
     protected void updateEntityFields(Follow e, FollowDto d) {
         e.setFollowerId(d.getFollowerId());
-        e.setFollowingId(d.getFollowingId());
+        e.setFollowedId(d.getFollowedId());
     }
 
     @Override
     public FollowDto create(FollowDto d) {
-        if (d.getFollowerId() != null && d.getFollowerId().equals(d.getFollowingId())) {
+        if (d.getFollowerId() != null && d.getFollowerId().equals(d.getFollowedId())) {
             throw new CoreException(MessageCodes.FAIL, "User cannot follow himself/herself");
         }
-        if (followRepository.existsByFollowerIdAndFollowingId(d.getFollowerId(), d.getFollowingId())) {
+        if (followRepository.existsByFollowerIdAndFollowedId(d.getFollowerId(), d.getFollowedId())) {
             throw new CoreException(
                     MessageCodes.ENTITY_ALREADY_EXISTS,
                     getEntityName(),
-                    "followerId=" + d.getFollowerId() + ", followingId=" + d.getFollowingId()
+                    "followerId=" + d.getFollowerId() + ", followingId=" + d.getFollowedId()
             );
         }
         return mapper.entityToDto(followRepository.save(mapper.toEntity(d)));

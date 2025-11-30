@@ -8,6 +8,8 @@ import com.example.blogsitebe.domain.platform.profile.api.ProfileService;
 import com.example.blogsitebe.library.security.JwtUtil;
 import com.example.blogsitebe.library.utils.Functions;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -81,6 +83,18 @@ public class UserServiceImpl implements UserService {
                 .map(UserMapper::toDto)
                 .toList();
     }
+
+    @Override
+    public Page<UserDto> searchByUsername(String query, Pageable pageable) {
+        if (query == null || query.trim().isEmpty()) {
+            return Page.empty(pageable);
+        }
+
+        var page = repository.findByUserNameContainingIgnoreCase(query, pageable);
+
+        return page.map(UserMapper::toDto);
+    }
+
 
 
 }

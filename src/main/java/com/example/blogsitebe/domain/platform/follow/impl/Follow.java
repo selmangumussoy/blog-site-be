@@ -15,12 +15,12 @@ import lombok.*;
 public class Follow extends AbstractEntity {
     public static final String TABLE = "follow";
     public static final String COL_FOLLOWER_ID = "follower_id";
-    public static final String COL_FOLLOWING_ID = "following_id";
+    public static final String COL_FOLLOWED_ID = "followed_id";
 
     @Column(name = COL_FOLLOWER_ID, nullable = false)
     private String followerId;
 
-    @Column(name = COL_FOLLOWING_ID, nullable = false)
-    private String followingId;
+    @Column(name = COL_FOLLOWED_ID, nullable = false)
+    private String followedId;
 }
 

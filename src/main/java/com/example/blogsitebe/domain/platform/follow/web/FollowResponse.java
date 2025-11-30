@@ -8,6 +8,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class FollowResponse extends AbstractResponse {
     private String followerId;
-    private String followingId;
+    private String followedId;
 
 }

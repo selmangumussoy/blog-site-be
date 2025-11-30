@@ -10,4 +10,6 @@ public interface ProfileService {
     ProfileDto getById(String id);
 
     ProfileDto save(String userName, String fullName, String phoneNumber);
+    ProfileDto getProfileByUsername(String username);
+
 }

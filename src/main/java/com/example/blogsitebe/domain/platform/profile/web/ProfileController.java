@@ -16,7 +16,7 @@ public class ProfileController extends BaseController {
 
 
     @PutMapping("/{id}")
-    public Response<ProfileResponse> update(@PathVariable(name = "id") String id, @RequestBody ProfileUpdateRequest updateRequest) {
+    public Response<ProfileResponse> update(@PathVariable String id, @RequestBody ProfileUpdateRequest updateRequest) {
         return respond(ProfileMapper.toResponse(service.update(ProfileMapper.toDto(updateRequest),id)));
     }
 
@@ -28,5 +28,12 @@ public class ProfileController extends BaseController {
     @GetMapping("/{id}")
     public Response<ProfileResponse> getById(@PathVariable(name = "id") String id) {
         return respond(ProfileMapper.toResponse(service.getById(id)));
+    }
+
+    @GetMapping("/username/{username}")
+    public Response<ProfileResponse> getProfileByUsername(@PathVariable String username) {
+        var profile = service.getProfileByUsername(username);
+
+        return respond(ProfileMapper.toResponse(profile));
     }
 }

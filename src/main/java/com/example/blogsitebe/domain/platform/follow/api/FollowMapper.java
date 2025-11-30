@@ -13,7 +13,7 @@ public class FollowMapper implements AbstractEntityMapper<Follow,FollowDto>, Abs
     public Follow toEntity(FollowDto d) {
         Follow e = new Follow();
         e.setFollowerId(d.getFollowerId());
-        e.setFollowingId(d.getFollowingId());
+        e.setFollowedId(d.getFollowedId());
         return e;
     }
 
@@ -24,7 +24,7 @@ public class FollowMapper implements AbstractEntityMapper<Follow,FollowDto>, Abs
                 .created(e.getCreated())
                 .modified(e.getModified())
                 .followerId(e.getFollowerId())
-                .followingId(e.getFollowingId())
+                .followedId(e.getFollowedId())
                 .build();
     }
 
@@ -32,7 +32,7 @@ public class FollowMapper implements AbstractEntityMapper<Follow,FollowDto>, Abs
     public FollowDto requestToDto(FollowRequest r) {
         return FollowDto.builder()
                 .followerId(r.getFollowerId())
-                .followingId(r.getFollowingId())
+                .followedId(r.getFollowedId())
                 .build();
     }
 
@@ -43,7 +43,7 @@ public class FollowMapper implements AbstractEntityMapper<Follow,FollowDto>, Abs
                 .created(d.getCreated())
                 .modified(d.getModified())
                 .followerId(d.getFollowerId())
-                .followingId(d.getFollowingId())
+                .followedId(d.getFollowedId())
                 .build();
     }
 }
