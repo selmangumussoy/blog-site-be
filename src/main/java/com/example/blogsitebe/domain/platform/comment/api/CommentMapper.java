@@ -13,6 +13,9 @@ public class CommentMapper implements AbstractEntityMapper<Comment, CommentDto>,
     @Override
     public Comment toEntity(CommentDto dto) {
         Comment comment = new Comment();
+        if (dto.getId() != null) {
+            comment.setId(dto.getId());
+        }
         comment.setPostId(dto.getPostId());
         comment.setUserId(dto.getUserId());
         comment.setParentCommentId(dto.getParentCommentId());
@@ -37,7 +40,6 @@ public class CommentMapper implements AbstractEntityMapper<Comment, CommentDto>,
     public CommentDto requestToDto(CommentRequest request) {
         return CommentDto.builder()
                 .postId(request.getPostId())
-                .userId(request.getUserId())
                 .parentCommentId(request.getParentCommentId())
                 .content(request.getContent())
                 .build();
@@ -53,6 +55,9 @@ public class CommentMapper implements AbstractEntityMapper<Comment, CommentDto>,
                 .content(dto.getContent())
                 .created(dto.getCreated())
                 .modified(dto.getModified())
+                .username(dto.getUsername())
+                .userFullName(dto.getUserFullName())
+                .userPicture(dto.getUserPicture())
                 .build();
     }
 }

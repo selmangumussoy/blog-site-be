@@ -4,6 +4,7 @@ import com.example.blogsitebe.library.rest.AbstractEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.UUID;
@@ -23,6 +24,7 @@ public class Comment extends AbstractEntity {
     public static final String COL_CONTENT = "content";
 
     @Column(name = COL_POST_ID)
+    @NotBlank(message = "Post ID zorunludur.")
     private String postId;
 
     @Column(name = COL_USER_ID)
@@ -32,5 +34,6 @@ public class Comment extends AbstractEntity {
     private String parentCommentId;
 
     @Column(name = COL_CONTENT)
+    @NotBlank(message = "Yorum içeriği boş olamaz.")
     private String content;
 }

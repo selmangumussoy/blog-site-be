@@ -13,4 +13,7 @@ public class CommentDto extends AbstractDto {
     private String userId;
     private String parentCommentId;
     private String content;
+    private String username;
+    private String userFullName;
+    private String userPicture;
 }
