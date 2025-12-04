@@ -24,5 +24,6 @@ import java.util.List;
         private int quoteCount;
         private int thoughtPostCount;
         private int suggestionCount;
+        private List<ActivityDto> latestActivities;
     }
 

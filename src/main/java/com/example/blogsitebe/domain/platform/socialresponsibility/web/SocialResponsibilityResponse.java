@@ -1,5 +1,6 @@
 package com.example.blogsitebe.domain.platform.socialresponsibility.web;
 
+import com.example.blogsitebe.domain.platform.socialresponsibility.api.ActivityDto;
 import com.example.blogsitebe.library.abstraction.AbstractResponse;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
@@ -21,4 +22,5 @@ public class SocialResponsibilityResponse extends AbstractResponse {
     private int blogCount;
     private int quoteCount;
     private int thoughtPostCount;
+    private List<ActivityDto> latestActivities;
 }

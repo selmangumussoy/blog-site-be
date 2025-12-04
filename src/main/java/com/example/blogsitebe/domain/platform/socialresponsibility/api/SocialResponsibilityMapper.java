@@ -71,6 +71,7 @@ import java.util.Collections;
                 .blogCount(dto.getBlogCount())
                 .quoteCount(dto.getQuoteCount())
                 .thoughtPostCount(dto.getThoughtPostCount())
+                .latestActivities(dto.getLatestActivities())
                 .build();
     }
 }
