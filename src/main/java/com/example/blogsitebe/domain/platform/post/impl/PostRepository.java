@@ -23,14 +23,11 @@ public interface PostRepository extends AbstractRepository<Post> {
     @Query("UPDATE Post p SET p.likeCount = p.likeCount - 1 WHERE p.id = :postId AND p.likeCount > 0")
     void decrementLikeCount(@Param("postId") String postId);
 
-    // ✅ YENİ 1: Etiket ismine ve Post Tipi'ne göre sayı (BLOG, QUOTE)
-    // Mantık: Post ID'si, 'sosyalsorumluluk' etiketine sahip PostTag'lerin içinde olanları say.
     @Query("SELECT COUNT(p) FROM Post p WHERE p.type = :type AND p.id IN " +
             "(SELECT pt.postId FROM PostTag pt WHERE pt.tagId IN " +
             "(SELECT t.id FROM Tag t WHERE t.name = :tagName))")
     long countByTagNameAndType(@Param("tagName") String tagName, @Param("type") PostType type);
 
-    // ✅ YENİ 2: Etiket ismine göre son postları getir
     @Query("SELECT p FROM Post p WHERE p.id IN " +
             "(SELECT pt.postId FROM PostTag pt WHERE pt.tagId IN " +
             "(SELECT t.id FROM Tag t WHERE t.name = :tagName)) " +

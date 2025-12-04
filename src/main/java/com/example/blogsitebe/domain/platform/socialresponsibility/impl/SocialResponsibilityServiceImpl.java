@@ -45,29 +45,27 @@ public class SocialResponsibilityServiceImpl extends AbstractServiceImpl<SocialR
 
     @Override
     public SocialResponsibilityDto getDashboardData() {
-        // 1. Aktif Temayı Getir
         SocialResponsibility entity = repository.findFirstByIsActiveTrue()
                 .orElse(new SocialResponsibility());
         SocialResponsibilityDto dto = mapper.entityToDto(entity);
-        // --- YENİ EKLENEN KISIM ---
         String targetTag = "sosyalsorumluluk";
-        // 2. İstatistikleri Say (BLOG ve QUOTE)
+
         long blogCount = postRepository.countByTagNameAndType(targetTag, PostType.BLOG_POST);
         long quoteCount = postRepository.countByTagNameAndType(targetTag, PostType.QUOTE_POST);
-        // 3. Son Aktiviteleri Çek (Son 5)
+
         Pageable topFive = PageRequest.of(0, 5);
         List<Post> posts = postRepository.findLatestByTagName(targetTag, topFive);
-        // 4. Postları ActivityDto'ya çevir (Kullanıcı bilgisiyle beraber)
+
         List<ActivityDto> activities = new ArrayList<>();
         for (Post post : posts) {
             String username = "Anonim";
             String avatar = null;
-            // Kullanıcı detaylarını çek (UserService üzerinden)
+
             try {
                 if (post.getUserId() != null) {
                     UserDto user = userService.getById(post.getUserId());
                     username = user.getUserName();
-                    // UserDto'da avatar varsa: avatar = user.getAvatar();
+
                 }
             } catch (Exception ignored) {}
             activities.add(ActivityDto.builder()
@@ -81,7 +79,6 @@ public class SocialResponsibilityServiceImpl extends AbstractServiceImpl<SocialR
                     .userAvatar(avatar)
                     .build());
         }
-        // 5. Verileri DTO'ya Set Et
         dto.setBlogCount((int) blogCount);
         dto.setQuoteCount((int) quoteCount);
         dto.setSuggestionCount(0); // Şimdilik 0 (Öneri tablosu yapılınca eklenecek)
@@ -96,7 +93,6 @@ public class SocialResponsibilityServiceImpl extends AbstractServiceImpl<SocialR
 
         long blogCount = postRepository.countByUserIdAndTagNameAndType(userId, targetTag, PostType.BLOG_POST);
         long quoteCount = postRepository.countByUserIdAndTagNameAndType(userId, targetTag, PostType.QUOTE_POST);
-        // long suggestionCount = ... (Öneri tablosu olunca eklenecek)
 
         return UserContributionDto.builder()
                 .myBlogCount((int) blogCount)
@@ -121,7 +117,7 @@ public class SocialResponsibilityServiceImpl extends AbstractServiceImpl<SocialR
                 .timeAgo(post.getCreated().toString())
                 .likeCount(post.getLikeCount())
                 .commentCount(post.getCommentCount())
-                .username("Ben") // Kendi postlarımız olduğu için
+                .username("Ben")
                 .build()
         ).toList();
     }
