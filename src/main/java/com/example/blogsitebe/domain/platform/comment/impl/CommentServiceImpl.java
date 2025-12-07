@@ -25,7 +25,7 @@ public class CommentServiceImpl extends AbstractServiceImpl<Comment, CommentDto>
     private final ProfileService profileService;
     private final PostService postService;
 
-    public CommentServiceImpl(CommentRepository repository, AbstractEntityMapper<Comment, CommentDto> mapper,UserService userService,
+    public CommentServiceImpl(CommentRepository repository, AbstractEntityMapper<Comment, CommentDto> mapper, UserService userService,
                               ProfileService profileService, PostService postService) {
         super(repository, mapper);
         this.commentRepository = repository;
@@ -43,6 +43,7 @@ public class CommentServiceImpl extends AbstractServiceImpl<Comment, CommentDto>
     protected void updateEntityFields(Comment entity, CommentDto dto) {
         entity.setContent(dto.getContent());
     }
+
     @Override
     @Transactional // İşlemlerin bütünlüğü için Transactional eklemek iyi olur
     public CommentDto create(CommentDto dto) {
@@ -84,5 +85,23 @@ public class CommentServiceImpl extends AbstractServiceImpl<Comment, CommentDto>
                     return dto;
                 })
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public void delete(String id) {
+        // 1. Silinecek yorumu bul (Post ID'sini almak için gerekli)
+        Comment comment = commentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Comment not found"));
+
+        String postId = comment.getPostId();
+
+        // 2. Yorumu sil (Standart silme işlemi)
+        super.delete(id);
+
+        // 3. Post servisinden sayacı düşür
+        if (postId != null) {
+            postService.decreaseCommentCount(postId);
+        }
     }
 }
