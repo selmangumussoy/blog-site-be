@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface PostService extends AbstractService<PostDto> {
     List<PostDto> getAllByUserId(String userId);
+    void increaseCommentCount(String postId);
+    void decreaseCommentCount(String postId);
 }

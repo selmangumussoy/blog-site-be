@@ -4,6 +4,7 @@ import com.example.blogsitebe.domain.auth.user.api.UserDto;
 import com.example.blogsitebe.domain.auth.user.api.UserService;
 import com.example.blogsitebe.domain.platform.comment.api.CommentDto;
 import com.example.blogsitebe.domain.platform.comment.api.CommentService;
+import com.example.blogsitebe.domain.platform.post.api.PostService;
 import com.example.blogsitebe.domain.platform.profile.api.ProfileDto;
 import com.example.blogsitebe.domain.platform.profile.api.ProfileService;
 import com.example.blogsitebe.library.abstraction.AbstractEntityMapper;
@@ -22,13 +23,15 @@ public class CommentServiceImpl extends AbstractServiceImpl<Comment, CommentDto>
     private final CommentRepository commentRepository;
     private final UserService userService;
     private final ProfileService profileService;
+    private final PostService postService;
 
     public CommentServiceImpl(CommentRepository repository, AbstractEntityMapper<Comment, CommentDto> mapper,UserService userService,
-                              ProfileService profileService) {
+                              ProfileService profileService, PostService postService) {
         super(repository, mapper);
         this.commentRepository = repository;
         this.userService = userService;
         this.profileService = profileService;
+        this.postService = postService;
     }
 
     @Override
@@ -41,10 +44,21 @@ public class CommentServiceImpl extends AbstractServiceImpl<Comment, CommentDto>
         entity.setContent(dto.getContent());
     }
     @Override
+    @Transactional // İşlemlerin bütünlüğü için Transactional eklemek iyi olur
     public CommentDto create(CommentDto dto) {
+        // 1. Kullanıcı ID'sini al
         String currentUserId = JwtUtil.extractUserIdAndIfAnonymousThrow();
         dto.setUserId(currentUserId);
-        return super.create(dto);
+
+        // 2. Yorumu kaydet (AbstractServiceImpl içindeki create metodu çalışır)
+        CommentDto createdComment = super.create(dto);
+
+        // 3. Post üzerindeki yorum sayısını artır (YENİ EKLENEN KISIM)
+        if (dto.getPostId() != null) {
+            postService.increaseCommentCount(dto.getPostId());
+        }
+
+        return createdComment;
     }
 
     @Override
@@ -61,7 +75,6 @@ public class CommentServiceImpl extends AbstractServiceImpl<Comment, CommentDto>
                         dto.setUserFullName(user.getFullName());
                         if (user.getProfileId() != null) {
                             ProfileDto profile = profileService.getById(user.getProfileId());
-
                             dto.setUserPicture(profile.getPicture());
                         }
                     } catch (Exception e) {
@@ -72,5 +85,4 @@ public class CommentServiceImpl extends AbstractServiceImpl<Comment, CommentDto>
                 })
                 .collect(Collectors.toList());
     }
-
 }

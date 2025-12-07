@@ -46,5 +46,15 @@ public interface PostRepository extends AbstractRepository<Post> {
             "(SELECT t.id FROM Tag t WHERE t.name = :tagName)) " +
             "ORDER BY p.created DESC")
     List<Post> findByUserIdAndTagNameAndType(@Param("userId") String userId, @Param("tagName") String tagName, @Param("type") PostType type);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Post p SET p.commentCount = COALESCE(p.commentCount, 0) + 1 WHERE p.id = :postId")
+    void incrementCommentCount(@Param("postId") String postId);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Post p SET p.commentCount = p.commentCount - 1 WHERE p.id = :postId AND p.commentCount > 0")
+    void decrementCommentCount(@Param("postId") String postId);
 }
 

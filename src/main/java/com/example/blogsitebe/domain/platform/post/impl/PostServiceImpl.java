@@ -125,4 +125,13 @@ public class PostServiceImpl extends AbstractServiceImpl<Post, PostDto> implemen
         }
         return tagIds;
     }
+    @Override
+    public void increaseCommentCount(String postId) {
+        postRepository.incrementCommentCount(postId);
+    }
+
+    @Override
+    public void decreaseCommentCount(String postId) {
+        postRepository.decrementCommentCount(postId);
+    }
 }
