@@ -70,7 +70,7 @@ import java.util.Collections;
                 .tags(dto.getTags())
                 .blogCount(dto.getBlogCount())
                 .quoteCount(dto.getQuoteCount())
-                .thoughtPostCount(dto.getThoughtPostCount())
+                .suggestionCount(dto.getSuggestionCount())
                 .latestActivities(dto.getLatestActivities())
                 .build();
     }

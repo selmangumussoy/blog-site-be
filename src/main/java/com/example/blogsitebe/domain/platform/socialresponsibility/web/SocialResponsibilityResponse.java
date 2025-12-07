@@ -21,6 +21,6 @@ public class SocialResponsibilityResponse extends AbstractResponse {
     private List<String> tags;
     private int blogCount;
     private int quoteCount;
-    private int thoughtPostCount;
+    private int suggestionCount;
     private List<ActivityDto> latestActivities;
 }
